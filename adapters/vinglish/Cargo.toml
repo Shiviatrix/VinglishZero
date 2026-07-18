@@ -1,0 +1,12 @@
+[package]
+name = "vz-adapter-vinglish"
+version.workspace = true
+edition.workspace = true
+description = "Vinglish semantic-export transport adapter"
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+vz-adapters = { workspace = true }
+vz-common = { workspace = true }
+vz-semantic-ir = { workspace = true }

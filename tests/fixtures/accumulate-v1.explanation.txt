@@ -1,0 +1,16 @@
+Function "calculate"
+
+Purpose:
+Accumulates values inside a loop.
+
+Inputs:
+numbers
+
+Produces:
+integer
+
+Operations:
+
+- Iterate while condition
+- Add values
+- Return result

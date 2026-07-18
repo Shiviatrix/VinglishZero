@@ -1,0 +1,14 @@
+/target/
+.venv/
+.vscode/
+.idea/
+.DS_Store
+.DS_Store?
+.vinglish-zero/cache/
+*.swp
+*.swo
+*.orig
+# generated benchmark outputs & temporary profiling artifacts
+benchmarks/outputs/
+*.prof
+*.out

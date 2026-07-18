@@ -1,0 +1,14 @@
+{
+  "code": "TYPE_MISMATCH",
+  "severity": "error",
+  "category": {
+    "kind": "type_mismatch"
+  },
+  "message": "incompatible values",
+  "location": {
+    "source": "example",
+    "start": 20,
+    "end": 35
+  },
+  "function_name": "calculate"
+}

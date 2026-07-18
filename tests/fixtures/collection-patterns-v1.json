@@ -1,0 +1,116 @@
+{
+  "format": "vinglish.semantic-export",
+  "version": 1,
+  "program": {
+    "modules": [
+      {
+        "name": "collection_patterns",
+        "functions": [
+          {
+            "name": "sum_values",
+            "parameters": [{ "name": "values", "type": { "kind": "collection", "element": { "kind": "integer" } }, "span": { "start": 0, "end": 0 } }],
+            "return_type": { "kind": "integer" },
+            "body": [
+              { "kind": "loop", "loop_kind": { "kind": "while", "condition": { "kind": "identifier", "name": "has_more", "span": { "start": 0, "end": 0 } } }, "body": [{ "kind": "mutation", "target": { "kind": "identifier", "name": "total", "span": { "start": 0, "end": 0 } }, "operation": "add", "value": { "kind": "identifier", "name": "value", "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 } },
+              { "kind": "return", "value": { "kind": "identifier", "name": "total", "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }
+            ], "span": { "start": 0, "end": 0 }
+          },
+          {
+            "name": "find_minimum", "parameters": [], "return_type": { "kind": "integer" },
+            "body": [
+              { "kind": "loop", "loop_kind": { "kind": "while", "condition": { "kind": "identifier", "name": "has_more", "span": { "start": 0, "end": 0 } } }, "body": [{ "kind": "conditional", "condition": { "kind": "binary", "operation": "less_than", "left": { "kind": "identifier", "name": "value", "span": { "start": 0, "end": 0 } }, "right": { "kind": "identifier", "name": "best", "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }, "then_body": [{ "kind": "assignment", "target": { "kind": "identifier", "name": "best", "span": { "start": 0, "end": 0 } }, "value": { "kind": "identifier", "name": "value", "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "else_body": null, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 } },
+              { "kind": "return", "value": { "kind": "identifier", "name": "best", "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }
+            ], "span": { "start": 0, "end": 0 }
+          },
+          {
+            "name": "count_if", "parameters": [], "return_type": { "kind": "integer" },
+            "body": [
+              { "kind": "loop", "loop_kind": { "kind": "while", "condition": { "kind": "identifier", "name": "has_more", "span": { "start": 0, "end": 0 } } }, "body": [{ "kind": "conditional", "condition": { "kind": "identifier", "name": "matches", "span": { "start": 0, "end": 0 } }, "then_body": [{ "kind": "mutation", "target": { "kind": "identifier", "name": "count", "span": { "start": 0, "end": 0 } }, "operation": "add", "value": { "kind": "literal", "value": { "kind": "integer", "value": 1 }, "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "else_body": null, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 } },
+              { "kind": "return", "value": { "kind": "identifier", "name": "count", "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }
+            ], "span": { "start": 0, "end": 0 }
+          },
+          {
+            "name": "any_match", "parameters": [], "return_type": { "kind": "boolean" },
+            "body": [
+              { "kind": "loop", "loop_kind": { "kind": "while", "condition": { "kind": "identifier", "name": "has_more", "span": { "start": 0, "end": 0 } } }, "body": [{ "kind": "conditional", "condition": { "kind": "identifier", "name": "matches", "span": { "start": 0, "end": 0 } }, "then_body": [{ "kind": "return", "value": { "kind": "literal", "value": { "kind": "boolean", "value": true }, "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "else_body": null, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 } },
+              { "kind": "return", "value": { "kind": "literal", "value": { "kind": "boolean", "value": false }, "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }
+            ], "span": { "start": 0, "end": 0 }
+          },
+          {
+            "name": "all_positive", "parameters": [], "return_type": { "kind": "boolean" },
+            "body": [
+              { "kind": "loop", "loop_kind": { "kind": "while", "condition": { "kind": "identifier", "name": "has_more", "span": { "start": 0, "end": 0 } } }, "body": [{ "kind": "conditional", "condition": { "kind": "identifier", "name": "invalid", "span": { "start": 0, "end": 0 } }, "then_body": [{ "kind": "return", "value": { "kind": "literal", "value": { "kind": "boolean", "value": false }, "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "else_body": null, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 } },
+              { "kind": "return", "value": { "kind": "literal", "value": { "kind": "boolean", "value": true }, "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }
+            ], "span": { "start": 0, "end": 0 }
+          },
+          {
+            "name": "find_first", "parameters": [], "return_type": { "kind": "integer" },
+            "body": [
+              { "kind": "loop", "loop_kind": { "kind": "while", "condition": { "kind": "identifier", "name": "has_more", "span": { "start": 0, "end": 0 } } }, "body": [{ "kind": "conditional", "condition": { "kind": "identifier", "name": "matches", "span": { "start": 0, "end": 0 } }, "then_body": [{ "kind": "return", "value": { "kind": "identifier", "name": "value", "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "else_body": null, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 } },
+              { "kind": "return", "value": { "kind": "literal", "value": { "kind": "integer", "value": -1 }, "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }
+            ], "span": { "start": 0, "end": 0 }
+          },
+          {
+            "name": "find_last", "parameters": [], "return_type": { "kind": "integer" },
+            "body": [
+              { "kind": "loop", "loop_kind": { "kind": "while", "condition": { "kind": "identifier", "name": "has_more", "span": { "start": 0, "end": 0 } } }, "body": [{ "kind": "conditional", "condition": { "kind": "identifier", "name": "matches", "span": { "start": 0, "end": 0 } }, "then_body": [{ "kind": "assignment", "target": { "kind": "identifier", "name": "last", "span": { "start": 0, "end": 0 } }, "value": { "kind": "identifier", "name": "value", "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "else_body": null, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 } },
+              { "kind": "return", "value": { "kind": "identifier", "name": "last", "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }
+            ], "span": { "start": 0, "end": 0 }
+          },
+          {
+            "name": "reverse_traversal", "parameters": [], "return_type": { "kind": "integer" },
+            "body": [{ "kind": "loop", "loop_kind": { "kind": "while", "condition": { "kind": "identifier", "name": "has_more", "span": { "start": 0, "end": 0 } } }, "body": [], "span": { "start": 0, "end": 0 } }, { "kind": "return", "value": { "kind": "literal", "value": { "kind": "integer", "value": 0 }, "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 }
+          },
+          {
+            "name": "prefix_sum", "parameters": [], "return_type": { "kind": "integer" },
+            "body": [{ "kind": "loop", "loop_kind": { "kind": "while", "condition": { "kind": "identifier", "name": "has_more", "span": { "start": 0, "end": 0 } } }, "body": [{ "kind": "mutation", "target": { "kind": "identifier", "name": "total", "span": { "start": 0, "end": 0 } }, "operation": "add", "value": { "kind": "identifier", "name": "value", "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 } }, { "kind": "return", "value": { "kind": "identifier", "name": "total", "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 }
+          },
+          {
+            "name": "frequency_counter", "parameters": [], "return_type": { "kind": "integer" },
+            "body": [{ "kind": "loop", "loop_kind": { "kind": "while", "condition": { "kind": "identifier", "name": "has_more", "span": { "start": 0, "end": 0 } } }, "body": [{ "kind": "mutation", "target": { "kind": "identifier", "name": "count", "span": { "start": 0, "end": 0 } }, "operation": "add", "value": { "kind": "literal", "value": { "kind": "integer", "value": 1 }, "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 } }, { "kind": "return", "value": { "kind": "identifier", "name": "count", "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 }
+          },
+          {
+            "name": "histogram", "parameters": [], "return_type": { "kind": "integer" },
+            "body": [{ "kind": "loop", "loop_kind": { "kind": "while", "condition": { "kind": "identifier", "name": "has_more", "span": { "start": 0, "end": 0 } } }, "body": [{ "kind": "mutation", "target": { "kind": "identifier", "name": "count", "span": { "start": 0, "end": 0 } }, "operation": "add", "value": { "kind": "literal", "value": { "kind": "integer", "value": 1 }, "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 } }, { "kind": "return", "value": { "kind": "identifier", "name": "count", "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 }
+          },
+          {
+            "name": "max_by", "parameters": [], "return_type": { "kind": "integer" },
+            "body": [{ "kind": "loop", "loop_kind": { "kind": "while", "condition": { "kind": "identifier", "name": "has_more", "span": { "start": 0, "end": 0 } } }, "body": [{ "kind": "conditional", "condition": { "kind": "binary", "operation": "greater_than", "left": { "kind": "identifier", "name": "value", "span": { "start": 0, "end": 0 } }, "right": { "kind": "identifier", "name": "best", "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }, "then_body": [{ "kind": "assignment", "target": { "kind": "identifier", "name": "best", "span": { "start": 0, "end": 0 } }, "value": { "kind": "identifier", "name": "value", "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "else_body": null, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 } }, { "kind": "return", "value": { "kind": "identifier", "name": "best", "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 }
+          },
+          {
+            "name": "min_by", "parameters": [], "return_type": { "kind": "integer" },
+            "body": [{ "kind": "loop", "loop_kind": { "kind": "while", "condition": { "kind": "identifier", "name": "has_more", "span": { "start": 0, "end": 0 } } }, "body": [{ "kind": "conditional", "condition": { "kind": "binary", "operation": "less_than", "left": { "kind": "identifier", "name": "value", "span": { "start": 0, "end": 0 } }, "right": { "kind": "identifier", "name": "best", "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }, "then_body": [{ "kind": "assignment", "target": { "kind": "identifier", "name": "best", "span": { "start": 0, "end": 0 } }, "value": { "kind": "identifier", "name": "value", "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "else_body": null, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 } }, { "kind": "return", "value": { "kind": "identifier", "name": "best", "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 }
+          },
+          {
+            "name": "group_by", "parameters": [], "return_type": { "kind": "integer" },
+            "body": [{ "kind": "loop", "loop_kind": { "kind": "while", "condition": { "kind": "identifier", "name": "has_more", "span": { "start": 0, "end": 0 } } }, "body": [], "span": { "start": 0, "end": 0 } }, { "kind": "return", "value": { "kind": "literal", "value": { "kind": "integer", "value": 0 }, "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 }
+          },
+          {
+            "name": "partition", "parameters": [], "return_type": { "kind": "integer" },
+            "body": [{ "kind": "loop", "loop_kind": { "kind": "while", "condition": { "kind": "identifier", "name": "has_more", "span": { "start": 0, "end": 0 } } }, "body": [{ "kind": "conditional", "condition": { "kind": "identifier", "name": "matches", "span": { "start": 0, "end": 0 } }, "then_body": [], "else_body": null, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 } }, { "kind": "return", "value": { "kind": "literal", "value": { "kind": "integer", "value": 0 }, "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 }
+          },
+          {
+            "name": "unique", "parameters": [], "return_type": { "kind": "integer" },
+            "body": [{ "kind": "loop", "loop_kind": { "kind": "while", "condition": { "kind": "identifier", "name": "has_more", "span": { "start": 0, "end": 0 } } }, "body": [{ "kind": "conditional", "condition": { "kind": "identifier", "name": "unseen", "span": { "start": 0, "end": 0 } }, "then_body": [], "else_body": null, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 } }, { "kind": "return", "value": { "kind": "literal", "value": { "kind": "integer", "value": 0 }, "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 }
+          },
+          {
+            "name": "distinct", "parameters": [], "return_type": { "kind": "integer" },
+            "body": [{ "kind": "loop", "loop_kind": { "kind": "while", "condition": { "kind": "identifier", "name": "has_more", "span": { "start": 0, "end": 0 } } }, "body": [{ "kind": "conditional", "condition": { "kind": "identifier", "name": "unseen", "span": { "start": 0, "end": 0 } }, "then_body": [], "else_body": null, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 } }, { "kind": "return", "value": { "kind": "literal", "value": { "kind": "integer", "value": 0 }, "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 }
+          },
+          {
+            "name": "zip_items", "parameters": [], "return_type": { "kind": "integer" },
+            "body": [{ "kind": "loop", "loop_kind": { "kind": "while", "condition": { "kind": "identifier", "name": "has_more", "span": { "start": 0, "end": 0 } } }, "body": [], "span": { "start": 0, "end": 0 } }, { "kind": "return", "value": { "kind": "literal", "value": { "kind": "integer", "value": 0 }, "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 }
+          },
+          {
+            "name": "flatten", "parameters": [], "return_type": { "kind": "integer" },
+            "body": [{ "kind": "loop", "loop_kind": { "kind": "while", "condition": { "kind": "identifier", "name": "outer", "span": { "start": 0, "end": 0 } } }, "body": [{ "kind": "loop", "loop_kind": { "kind": "while", "condition": { "kind": "identifier", "name": "inner", "span": { "start": 0, "end": 0 } } }, "body": [], "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 } }, { "kind": "return", "value": { "kind": "literal", "value": { "kind": "integer", "value": 0 }, "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 }
+          },
+          {
+            "name": "contains", "parameters": [], "return_type": { "kind": "boolean" },
+            "body": [{ "kind": "loop", "loop_kind": { "kind": "while", "condition": { "kind": "identifier", "name": "has_more", "span": { "start": 0, "end": 0 } } }, "body": [{ "kind": "conditional", "condition": { "kind": "identifier", "name": "matches", "span": { "start": 0, "end": 0 } }, "then_body": [{ "kind": "return", "value": { "kind": "literal", "value": { "kind": "boolean", "value": true }, "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "else_body": null, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 } }, { "kind": "return", "value": { "kind": "literal", "value": { "kind": "boolean", "value": false }, "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 }
+          }
+        ]
+      }
+    ]
+  }
+}

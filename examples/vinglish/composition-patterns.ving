@@ -1,0 +1,9 @@
+function filter_map_reduce(values: integer[]) -> integer {
+    mutable result: integer = 0
+    while has_more {
+        if value > 0 {
+            result = combine(result, transform(value))
+        }
+    }
+    return result
+}

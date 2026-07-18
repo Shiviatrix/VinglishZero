@@ -1,0 +1,10 @@
+[package]
+name = "vz-adapter-javascript"
+version.workspace = true
+edition.workspace = true
+description = "JavaScript adapter placeholder"
+
+[dependencies]
+vz-adapters = { workspace = true }
+vz-common = { workspace = true }
+vz-semantic-ir = { workspace = true }

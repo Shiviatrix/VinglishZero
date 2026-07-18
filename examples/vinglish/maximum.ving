@@ -1,0 +1,10 @@
+function find_maximum(numbers: integer[]) -> integer {
+    mutable maximum: integer = first(numbers)
+    while has_more(numbers) {
+        mutable number: integer = next(numbers)
+        if number > maximum {
+            maximum = number
+        }
+    }
+    return maximum
+}

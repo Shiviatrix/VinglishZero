@@ -1,0 +1,12 @@
+[package]
+name = "vz-adapter-c"
+version.workspace = true
+edition.workspace = true
+description = "Clang AST adapter for Vinglish Zero"
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+vz-adapters = { workspace = true }
+vz-common = { workspace = true }
+vz-semantic-ir = { workspace = true }

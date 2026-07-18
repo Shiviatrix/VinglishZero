@@ -1,0 +1,14 @@
+function binary_search(numbers: integer[], target: integer) -> integer {
+    while low <= high {
+        mutable middle: integer = (low + high) / 2
+        if middle == target {
+            return middle
+        }
+        if middle < target {
+            low = middle + 1
+        } else {
+            high = middle - 1
+        }
+    }
+    return -1
+}

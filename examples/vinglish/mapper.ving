@@ -1,0 +1,7 @@
+function mapper(values: integer[]) -> integer {
+    mutable result: integer = 0
+    while has_more {
+        result = transform(value)
+    }
+    return result
+}

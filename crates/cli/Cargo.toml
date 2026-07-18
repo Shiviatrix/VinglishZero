@@ -1,0 +1,22 @@
+[package]
+name = "vz-cli"
+version.workspace = true
+edition.workspace = true
+description = "The vz command-line interface"
+
+[[bin]]
+name = "vz"
+path = "src/main.rs"
+
+[dependencies]
+vz-adapters = { workspace = true }
+vz-diagnostics = { workspace = true }
+vz-reasoning = { workspace = true }
+vz-semantic-engine = { workspace = true }
+vz-semantic-ir = { workspace = true }
+vz-adapter-vinglish = { path = "../../adapters/vinglish" }
+vz-adapter-python = { path = "../../adapters/python" }
+vz-adapter-java = { path = "../../adapters/java" }
+vz-adapter-c = { path = "../../adapters/c" }
+serde = { workspace = true }
+serde_json = { workspace = true }

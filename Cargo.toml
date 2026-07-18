@@ -1,0 +1,35 @@
+[workspace]
+members = [
+    "crates/common",
+    "crates/semantic-ir",
+    "crates/adapters",
+    "crates/diagnostics",
+    "crates/semantic-engine",
+    "crates/reasoning",
+    "crates/cli",
+    "adapters/vinglish",
+    "adapters/python",
+    "adapters/rust",
+    "adapters/javascript",
+    "adapters/typescript",
+    "adapters/java",
+    "adapters/c",
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["Vinglish Zero Contributors"]
+license = "MIT"
+repository = "https://github.com/Shiviatrix/vinglish-zero"
+
+[workspace.dependencies]
+vz-common = { path = "crates/common" }
+vz-semantic-ir = { path = "crates/semantic-ir" }
+vz-adapters = { path = "crates/adapters" }
+vz-diagnostics = { path = "crates/diagnostics" }
+vz-semantic-engine = { path = "crates/semantic-engine" }
+vz-reasoning = { path = "crates/reasoning" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"

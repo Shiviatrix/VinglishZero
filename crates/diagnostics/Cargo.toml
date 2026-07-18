@@ -1,0 +1,11 @@
+[package]
+name = "vz-diagnostics"
+version.workspace = true
+edition.workspace = true
+description = "Structured diagnostic output for semantic analysis"
+
+[dependencies]
+vz-common = { workspace = true }
+vz-semantic-ir = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }

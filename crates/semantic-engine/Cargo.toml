@@ -1,0 +1,10 @@
+[package]
+name = "vz-semantic-engine"
+version.workspace = true
+edition.workspace = true
+description = "Language-agnostic semantic analysis boundaries"
+
+[dependencies]
+vz-common = { workspace = true }
+vz-diagnostics = { workspace = true }
+vz-semantic-ir = { workspace = true }

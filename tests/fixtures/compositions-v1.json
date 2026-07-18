@@ -1,0 +1,36 @@
+{
+  "format": "vinglish.semantic-export",
+  "version": 1,
+  "program": {
+    "modules": [{
+      "name": "compositions",
+      "functions": [{
+        "name": "filter_map_reduce",
+        "parameters": [{ "name": "values", "type": { "kind": "collection", "element": { "kind": "integer" } }, "span": { "start": 0, "end": 0 } }],
+        "return_type": { "kind": "integer" },
+        "body": [{
+          "kind": "loop",
+          "loop_kind": { "kind": "while", "condition": { "kind": "identifier", "name": "has_more", "span": { "start": 0, "end": 0 } } },
+          "body": [{
+            "kind": "conditional",
+            "condition": { "kind": "binary", "operation": "greater_than", "left": { "kind": "identifier", "name": "value", "span": { "start": 0, "end": 0 } }, "right": { "kind": "literal", "value": { "kind": "integer", "value": 0 }, "span": { "start": 0, "end": 0 } }, "span": { "start": 0, "end": 0 } },
+            "then_body": [{
+              "kind": "assignment",
+              "target": { "kind": "identifier", "name": "result", "span": { "start": 0, "end": 0 } },
+              "value": { "kind": "call", "callee": { "kind": "identifier", "name": "combine", "span": { "start": 0, "end": 0 } }, "arguments": [{ "kind": "identifier", "name": "result", "span": { "start": 0, "end": 0 } }, { "kind": "call", "callee": { "kind": "identifier", "name": "transform", "span": { "start": 0, "end": 0 } }, "arguments": [{ "kind": "identifier", "name": "value", "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 } }], "span": { "start": 0, "end": 0 } },
+              "span": { "start": 0, "end": 0 }
+            }],
+            "else_body": null,
+            "span": { "start": 0, "end": 0 }
+          }],
+          "span": { "start": 0, "end": 0 }
+        }, {
+          "kind": "return",
+          "value": { "kind": "identifier", "name": "result", "span": { "start": 0, "end": 0 } },
+          "span": { "start": 0, "end": 0 }
+        }],
+        "span": { "start": 0, "end": 0 }
+      }]
+    }]
+  }
+}

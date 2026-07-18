@@ -1,0 +1,10 @@
+[package]
+name = "vz-adapter-rust"
+version.workspace = true
+edition.workspace = true
+description = "Rust adapter placeholder"
+
+[dependencies]
+vz-adapters = { workspace = true }
+vz-common = { workspace = true }
+vz-semantic-ir = { workspace = true }

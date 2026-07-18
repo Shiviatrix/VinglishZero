@@ -1,0 +1,8 @@
+function linear_search(numbers: integer[], target: integer) -> integer {
+    while has_more {
+        if number == target {
+            return index
+        }
+    }
+    return -1
+}

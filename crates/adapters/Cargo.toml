@@ -1,0 +1,9 @@
+[package]
+name = "vz-adapters"
+version.workspace = true
+edition.workspace = true
+description = "Adapter contracts for turning language-specific structures into Semantic IR"
+
+[dependencies]
+vz-common = { workspace = true }
+vz-semantic-ir = { workspace = true }

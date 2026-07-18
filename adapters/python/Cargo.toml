@@ -1,0 +1,18 @@
+[package]
+name = "vz-adapter-python"
+version.workspace = true
+edition.workspace = true
+description = "Python standard-ast to Semantic IR adapter"
+
+[dependencies]
+pyo3 = { version = "0.23", features = ["auto-initialize"] }
+serde = { workspace = true }
+serde_json = { workspace = true }
+vz-adapters = { workspace = true }
+vz-common = { workspace = true }
+vz-semantic-ir = { workspace = true }
+
+[dev-dependencies]
+vz-adapter-vinglish = { path = "../vinglish" }
+vz-diagnostics = { workspace = true }
+vz-reasoning = { workspace = true }

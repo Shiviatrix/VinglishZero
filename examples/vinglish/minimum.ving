@@ -1,0 +1,9 @@
+function find_minimum(numbers: integer[]) -> integer {
+    mutable minimum: integer = first(numbers)
+    while has_more {
+        if number < minimum {
+            minimum = number
+        }
+    }
+    return minimum
+}

@@ -1,0 +1,68 @@
+{
+  "format": "vinglish.semantic-export",
+  "version": 1,
+  "program": {
+    "modules": [
+      {
+        "name": "main",
+        "functions": [
+          {
+            "name": "calculate",
+            "parameters": [
+              {
+                "name": "numbers",
+                "type": {
+                  "kind": "collection",
+                  "element": { "kind": "integer" }
+                },
+                "span": { "start": 0, "end": 7 }
+              }
+            ],
+            "return_type": { "kind": "integer" },
+            "body": [
+              {
+                "kind": "loop",
+                "loop_kind": {
+                  "kind": "while",
+                  "condition": {
+                    "kind": "identifier",
+                    "name": "has_more",
+                    "span": { "start": 10, "end": 18 }
+                  }
+                },
+                "body": [
+                  {
+                    "kind": "mutation",
+                    "target": {
+                      "kind": "identifier",
+                      "name": "total",
+                      "span": { "start": 20, "end": 25 }
+                    },
+                    "operation": "add",
+                    "value": {
+                      "kind": "identifier",
+                      "name": "number",
+                      "span": { "start": 29, "end": 35 }
+                    },
+                    "span": { "start": 20, "end": 35 }
+                  }
+                ],
+                "span": { "start": 10, "end": 36 }
+              },
+              {
+                "kind": "return",
+                "value": {
+                  "kind": "identifier",
+                  "name": "total",
+                  "span": { "start": 45, "end": 50 }
+                },
+                "span": { "start": 38, "end": 50 }
+              }
+            ],
+            "span": { "start": 0, "end": 50 }
+          }
+        ]
+      }
+    ]
+  }
+}

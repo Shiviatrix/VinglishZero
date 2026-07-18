@@ -1,0 +1,9 @@
+function filter_positive(values: integer[]) -> integer {
+    mutable count: integer = 0
+    while has_more {
+        if value > 0 {
+            count += 1
+        }
+    }
+    return count
+}

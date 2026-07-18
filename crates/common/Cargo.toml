@@ -1,0 +1,9 @@
+[package]
+name = "vz-common"
+version.workspace = true
+edition.workspace = true
+description = "Zero-dependency primitives shared across all VinglishZero crates"
+
+[dependencies]
+serde = { workspace = true }
+

@@ -1,0 +1,20 @@
+function sum_values(values: integer[]) -> integer { mutable total: integer = 0 while has_more { total += value } return total }
+function find_minimum(values: integer[]) -> integer { mutable best: integer = 0 while has_more { if value < best { best = value } } return best }
+function count_if(values: integer[]) -> integer { mutable count: integer = 0 while has_more { if value > 0 { count += 1 } } return count }
+function any_match(values: integer[]) -> boolean { while has_more { if value > 0 { return true } } return false }
+function all_positive(values: integer[]) -> boolean { while has_more { if value <= 0 { return false } } return true }
+function find_first(values: integer[], target: integer) -> integer { while has_more { if value == target { return value } } return -1 }
+function find_last(values: integer[], target: integer) -> integer { mutable last: integer = -1 while has_more { if value == target { last = value } } return last }
+function reverse_traversal(values: integer[]) -> integer { mutable total: integer = 0 while has_more { total += value } return total }
+function prefix_sum(values: integer[]) -> integer { mutable total: integer = 0 while has_more { total += value } return total }
+function frequency_counter(values: integer[]) -> integer { mutable count: integer = 0 while has_more { count += 1 } return count }
+function histogram(values: integer[]) -> integer { mutable count: integer = 0 while has_more { count += 1 } return count }
+function max_by(values: integer[]) -> integer { mutable best: integer = 0 while has_more { if value > best { best = value } } return best }
+function min_by(values: integer[]) -> integer { mutable best: integer = 0 while has_more { if value < best { best = value } } return best }
+function group_by(values: integer[]) -> integer { mutable count: integer = 0 while has_more { count += 1 } return count }
+function partition(values: integer[]) -> integer { mutable count: integer = 0 while has_more { if value > 0 { count += 1 } } return count }
+function unique(values: integer[]) -> integer { mutable count: integer = 0 while has_more { if value > 0 { count += 1 } } return count }
+function distinct(values: integer[]) -> integer { mutable count: integer = 0 while has_more { if value > 0 { count += 1 } } return count }
+function zip_items(values: integer[]) -> integer { mutable total: integer = 0 while has_more { total += value } return total }
+function flatten(values: integer[]) -> integer { mutable total: integer = 0 while has_more { while has_more { total += value } } return total }
+function contains(values: integer[], target: integer) -> boolean { while has_more { if value == target { return true } } return false }

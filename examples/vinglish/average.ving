@@ -1,0 +1,9 @@
+function average(numbers: integer[]) -> decimal {
+    mutable total: integer = 0
+    mutable count: integer = 0
+    while has_more {
+        total += number
+        count += 1
+    }
+    return total / count
+}

@@ -1,0 +1,13 @@
+[package]
+name = "vz-reasoning"
+version.workspace = true
+edition.workspace = true
+description = "Higher-level reasoning orchestration for semantic workflows"
+
+[dependencies]
+vz-common = { workspace = true }
+vz-diagnostics = { workspace = true }
+vz-semantic-engine = { workspace = true }
+vz-semantic-ir = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }

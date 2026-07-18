@@ -1,0 +1,9 @@
+[package]
+name = "vz-semantic-ir"
+version.workspace = true
+edition.workspace = true
+description = "The language-agnostic Semantic IR shared by Vinglish Zero adapters and engines"
+
+[dependencies]
+vz-common = { workspace = true }
+
