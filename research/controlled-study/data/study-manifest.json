@@ -1,0 +1,24 @@
+{
+  "study_id": "vz-controlled-generation-v1",
+  "status": "blocked_pending_frozen_specifications",
+  "reason": "The prior comparison archive does not contain immutable generation prompts, model settings, or five-level task specifications.",
+  "benchmarks": [
+    "chess_engine",
+    "json_parser",
+    "markdown_parser",
+    "regex_engine",
+    "sql_database_engine"
+  ],
+  "levels": ["L1", "L2", "L3", "L4", "L5"],
+  "replications_per_cell": 10,
+  "arms": ["baseline", "vinglish_zero"],
+  "required_artifacts": {
+    "task_specification_bundle": null,
+    "system_prompt": null,
+    "evaluation_prompt": null,
+    "model_snapshot": null,
+    "generation_settings": null,
+    "hardware_manifest": null,
+    "evaluator_revision": null
+  }
+}

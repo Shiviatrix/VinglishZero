@@ -18,7 +18,7 @@ Cache entries live under `.vinglish-zero/cache/`, one binary blob per stable
 - Semantic IR, reasoning engine, hypothesis registry, and cache versions
 - immutable function facts
 - `FunctionIntentReport`, including primary intent and semantic pipeline
-- diagnostics placeholder and query metadata
+- diagnostics and query metadata
 
 An unchanged source fingerprint loads the cache directly. When a source file
 changes, it is lowered normally, but only functions with a changed semantic hash

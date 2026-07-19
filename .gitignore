@@ -4,11 +4,17 @@
 .idea/
 .DS_Store
 .DS_Store?
+__pycache__/
+*.py[cod]
 .vinglish-zero/cache/
 *.swp
 *.swo
 *.orig
 # generated benchmark outputs & temporary profiling artifacts
 benchmarks/outputs/
+research/controlled-study/results/execution/
+research/controlled-study/results/generated/
+research/controlled-study/.bundles/
+research/controlled-study/.workspaces/
 *.prof
 *.out

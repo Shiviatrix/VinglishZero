@@ -2,7 +2,7 @@
 name = "vz-adapter-javascript"
 version.workspace = true
 edition.workspace = true
-description = "JavaScript adapter placeholder"
+description = "JavaScript source-adapter extension point for Vinglish Zero"
 
 [dependencies]
 vz-adapters = { workspace = true }

@@ -72,13 +72,17 @@ time, and 49 us average query matching time. A warm cached repository query
 avoids frontend work entirely. Results are machine-dependent; regenerate them
 with `vz benchmark` and `vz profile`.
 
-## Independent Study
+## Controlled Study
 
 An external five-domain comparison of baseline and Vinglish Zero-assisted
 generated Python systems recorded 20 versus 28 generation credits and 19:43
 versus 21:34 elapsed time. The study also found meaningful correctness, safety,
 and architecture trade-offs, so it does not claim causation or an overall
 quality winner. Read the full [cross-benchmark study](docs/benchmarks/cross-benchmark-study.md).
+The preregistered [controlled study protocol](research/controlled-study/README.md)
+and [generation harness](research/controlled-study/generation/README.md)
+define the provenance, manifest freezing, execution, and analysis workflow
+required for valid replication. No confirmatory samples are checked in.
 
 ## Repository Layout
 
@@ -89,6 +93,7 @@ docs/         Architecture and design decisions
 examples/     Representative source programs
 tests/        Transport fixtures and integration coverage
 verification/ Generated verification and benchmark reports
+research/     Controlled-study protocol, generation harness, and analysis tools
 ```
 
 ## Design Documents

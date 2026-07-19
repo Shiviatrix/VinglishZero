@@ -19,7 +19,10 @@ fn main() {
 
     match command.as_deref() {
         Some("--help") | Some("-h") | Some("help") => print_help(),
-        Some("analyze") => println!("vz analyze: not implemented"),
+        Some("analyze") => {
+            eprintln!("`vz analyze` is not a public 1.0 command. Use `vz explain <source>` or `vz verify`.");
+            process::exit(2);
+        }
         Some("explain") => {
             let Some(file) = args.next() else {
                 eprintln!("usage: vz explain <source>");
@@ -139,11 +142,17 @@ fn main() {
                 process::exit(1);
             }
         },
-        Some("export") => println!("vz export: not implemented"),
-        Some("doctor") => println!("vz doctor: not implemented"),
+        Some("export") => {
+            eprintln!("`vz export` is not a Vinglish Zero command. For Vinglish source, use the compiler-owned `vng --emit-ir <source>` transport.");
+            process::exit(2);
+        }
+        Some("doctor") => {
+            eprintln!("`vz doctor` is not a public 1.0 command. Use `vz validate`, `vz verify`, and `vz profile` for repository health checks.");
+            process::exit(2);
+        }
         Some(other) => {
             eprintln!("unknown command: {other}");
-            eprintln!("usage: vz <analyze|benchmark|diagnose|explain|export|profile|query|stats|validate|verify|doctor>");
+            eprintln!("usage: vz <benchmark|diagnose|explain|profile|query|stats|validate|verify>");
             process::exit(2);
         }
         None => {

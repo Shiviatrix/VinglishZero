@@ -17,6 +17,9 @@ workload-specific correctness and performance results must not be interpreted
 as benchmarks of `vz` itself. For the Vinglish Zero CLI benchmark harness, see
 [Benchmarking](../benchmarking.md).
 
+The comparisons are exploratory prior evidence, not input to the confirmatory
+[controlled generation study](../../research/controlled-study/README.md).
+
 ## Generation Resources
 
 The following generation credits and elapsed times were supplied after the

@@ -2,7 +2,7 @@
 name = "vz-adapter-typescript"
 version.workspace = true
 edition.workspace = true
-description = "TypeScript adapter placeholder"
+description = "TypeScript source-adapter extension point for Vinglish Zero"
 
 [dependencies]
 vz-adapters = { workspace = true }

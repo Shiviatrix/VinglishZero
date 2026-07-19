@@ -2,7 +2,7 @@
 name = "vz-adapter-rust"
 version.workspace = true
 edition.workspace = true
-description = "Rust adapter placeholder"
+description = "Rust source-adapter extension point for Vinglish Zero"
 
 [dependencies]
 vz-adapters = { workspace = true }
