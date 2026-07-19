@@ -8,6 +8,7 @@ mod profile;
 mod query;
 mod registry;
 mod transport_input;
+mod validation;
 mod verification;
 
 use transport_input::SemanticTransportAcquirer;
@@ -121,6 +122,16 @@ fn main() {
                 process::exit(1);
             }
         },
+        Some("validate") => match validation::run() {
+            Ok(report) => println!(
+                "validation passed: {} semantic patterns",
+                report.semantic_patterns.passed
+            ),
+            Err(error) => {
+                eprintln!("validation failed: {error}");
+                process::exit(1);
+            }
+        },
         Some("benchmark") => match benchmark::run() {
             Ok(_) => println!("benchmark reports written to verification/"),
             Err(error) => {
@@ -132,7 +143,7 @@ fn main() {
         Some("doctor") => println!("vz doctor: not implemented"),
         Some(other) => {
             eprintln!("unknown command: {other}");
-            eprintln!("usage: vz <analyze|benchmark|diagnose|explain|export|profile|query|stats|verify|doctor>");
+            eprintln!("usage: vz <analyze|benchmark|diagnose|explain|export|profile|query|stats|validate|verify|doctor>");
             process::exit(2);
         }
         None => {
@@ -176,5 +187,5 @@ fn graph_for(file: &str) -> vz_semantic_ir::SemanticGraph {
 }
 
 fn print_help() {
-    println!("Vinglish Zero deterministic semantic analysis\n\nUsage:\n  vz explain <source>\n  vz diagnose <compiler-diagnostic.json> <source>\n  vz query <expression>\n  vz profile\n  vz stats\n  vz verify\n  vz benchmark\n\nQueries scan registered source files and compiler transport fixtures in the current repository. Source extensions select a registered adapter. Vinglish JSON remains the stable compiler interoperability contract.");
+    println!("Vinglish Zero deterministic semantic analysis\n\nUsage:\n  vz explain <source>\n  vz diagnose <compiler-diagnostic.json> <source>\n  vz query <expression>\n  vz profile\n  vz stats\n  vz verify\n  vz validate\n  vz benchmark\n\nQueries scan registered source files and compiler transport fixtures in the current repository. Source extensions select a registered adapter. Vinglish JSON remains the stable compiler interoperability contract.");
 }

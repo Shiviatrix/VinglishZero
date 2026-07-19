@@ -1,0 +1,10 @@
+{
+  "code": "VZ1002",
+  "severity": "error",
+  "category": {
+    "kind": "missing_division"
+  },
+  "message": "average computation is missing a division",
+  "location": null,
+  "function_name": "calculate"
+}

@@ -219,6 +219,12 @@ pub struct BenchmarkSummary {
     slowest_total_nanos: u64,
 }
 
+impl BenchmarkSummary {
+    pub fn average_total_nanos(&self) -> u64 {
+        self.average_total_nanos
+    }
+}
+
 #[derive(Debug)]
 pub enum BenchmarkError {
     Registry(String),

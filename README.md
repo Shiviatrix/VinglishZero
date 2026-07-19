@@ -53,6 +53,7 @@ imports compiler crates, parses Vinglish source itself, or accesses compiler HIR
 vz explain examples/python/accumulator.py
 vz query "filter THEN reduce"
 vz verify
+vz validate
 vz benchmark
 vz profile
 vz stats
@@ -102,6 +103,7 @@ source adapters.
 cargo build --workspace --offline
 cargo test --workspace --offline
 cargo run -p vz-cli --offline -- verify
+cargo run -p vz-cli --offline -- validate
 cargo run -p vz-cli --offline -- benchmark
 ```
 

@@ -18,5 +18,7 @@ jobs:
         run: cargo test --workspace
       - name: Verify
         run: cargo run -p vz-cli -- verify
+      - name: Validate
+        run: cargo run -p vz-cli -- validate
       - name: Benchmark
         run: cargo run -p vz-cli -- benchmark

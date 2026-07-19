@@ -23,6 +23,72 @@ const ACCUMULATOR_SOURCES: &[(&str, &str)] = &[
     ("C", "examples/c/accumulator.c"),
     ("Vinglish", "tests/fixtures/accumulate-v1.json"),
 ];
+const COUNTER_SOURCES: &[(&str, &str)] = &[
+    ("Python", "examples/python/counter.py"),
+    ("Java", "examples/java/Counter.java"),
+    ("C", "examples/c/counter.c"),
+    ("Vinglish", "tests/fixtures/counter-v1.json"),
+];
+const MAXIMUM_SOURCES: &[(&str, &str)] = &[
+    ("Python", "examples/python/maximum.py"),
+    ("Java", "examples/java/Maximum.java"),
+    ("C", "examples/c/maximum.c"),
+    ("Vinglish", "tests/fixtures/maximum-v1.json"),
+];
+const MINIMUM_SOURCES: &[(&str, &str)] = &[
+    ("Python", "examples/python/minimum.py"),
+    ("Java", "examples/java/Minimum.java"),
+    ("C", "examples/c/minimum.c"),
+    ("Vinglish", "tests/fixtures/minimum-v1.json"),
+];
+const AVERAGE_SOURCES: &[(&str, &str)] = &[
+    ("Python", "examples/python/average.py"),
+    ("Java", "examples/java/Average.java"),
+    ("C", "examples/c/average.c"),
+    ("Vinglish", "tests/fixtures/average-v1.json"),
+];
+const PRODUCT_SOURCES: &[(&str, &str)] = &[
+    ("Python", "examples/python/product.py"),
+    ("Java", "examples/java/Product.java"),
+    ("C", "examples/c/product.c"),
+    ("Vinglish", "tests/fixtures/product-v1.json"),
+];
+const REDUCER_SOURCES: &[(&str, &str)] = &[
+    ("Python", "examples/python/reducer.py"),
+    ("Java", "examples/java/Reducer.java"),
+    ("C", "examples/c/reducer.c"),
+    ("Vinglish", "tests/fixtures/reducer-v1.json"),
+];
+const MAPPER_SOURCES: &[(&str, &str)] = &[
+    ("Python", "examples/python/mapper.py"),
+    ("Java", "examples/java/Mapper.java"),
+    ("C", "examples/c/mapper.c"),
+    ("Vinglish", "tests/fixtures/mapper-v1.json"),
+];
+const FILTER_SOURCES: &[(&str, &str)] = &[
+    ("Python", "examples/python/filter.py"),
+    ("Java", "examples/java/Filter.java"),
+    ("C", "examples/c/filter.c"),
+    ("Vinglish", "tests/fixtures/filter-v1.json"),
+];
+const VALIDATOR_SOURCES: &[(&str, &str)] = &[
+    ("Python", "examples/python/validator.py"),
+    ("Java", "examples/java/Validator.java"),
+    ("C", "examples/c/validator.c"),
+    ("Vinglish", "tests/fixtures/validator-v1.json"),
+];
+const LINEAR_SEARCH_SOURCES: &[(&str, &str)] = &[
+    ("Python", "examples/python/linear_search.py"),
+    ("Java", "examples/java/LinearSearch.java"),
+    ("C", "examples/c/linear_search.c"),
+    ("Vinglish", "tests/fixtures/linear-search-v1.json"),
+];
+const BINARY_SEARCH_SOURCES: &[(&str, &str)] = &[
+    ("Python", "examples/python/binary_search.py"),
+    ("Java", "examples/java/BinarySearch.java"),
+    ("C", "examples/c/binary_search.c"),
+    ("Vinglish", "tests/fixtures/binary-search-v1.json"),
+];
 
 const COLLECTION_SOURCES: &[(&str, &str)] = &[
     ("Python", "examples/python/collection_patterns.py"),
@@ -44,13 +110,63 @@ const CORPUS: &[CorpusPattern] = &[
         sources: ACCUMULATOR_SOURCES,
     },
     CorpusPattern {
-        id: "sum",
-        function: "sum_values",
-        sources: COLLECTION_SOURCES,
+        id: "counter",
+        function: "count_items",
+        sources: COUNTER_SOURCES,
+    },
+    CorpusPattern {
+        id: "maximum",
+        function: "find_maximum",
+        sources: MAXIMUM_SOURCES,
     },
     CorpusPattern {
         id: "minimum",
         function: "find_minimum",
+        sources: MINIMUM_SOURCES,
+    },
+    CorpusPattern {
+        id: "average",
+        function: "average",
+        sources: AVERAGE_SOURCES,
+    },
+    CorpusPattern {
+        id: "product",
+        function: "product",
+        sources: PRODUCT_SOURCES,
+    },
+    CorpusPattern {
+        id: "reducer",
+        function: "reducer",
+        sources: REDUCER_SOURCES,
+    },
+    CorpusPattern {
+        id: "mapper",
+        function: "mapper",
+        sources: MAPPER_SOURCES,
+    },
+    CorpusPattern {
+        id: "filter",
+        function: "filter_positive",
+        sources: FILTER_SOURCES,
+    },
+    CorpusPattern {
+        id: "validator",
+        function: "validate",
+        sources: VALIDATOR_SOURCES,
+    },
+    CorpusPattern {
+        id: "linear_search",
+        function: "linear_search",
+        sources: LINEAR_SEARCH_SOURCES,
+    },
+    CorpusPattern {
+        id: "binary_search",
+        function: "binary_search",
+        sources: BINARY_SEARCH_SOURCES,
+    },
+    CorpusPattern {
+        id: "sum",
+        function: "sum_values",
         sources: COLLECTION_SOURCES,
     },
     CorpusPattern {
@@ -147,8 +263,8 @@ const CORPUS: &[CorpusPattern] = &[
 
 #[derive(Debug, Serialize)]
 pub struct VerificationReport {
-    version: u32,
-    patterns: Vec<PatternReport>,
+    pub(crate) version: u32,
+    pub(crate) patterns: Vec<PatternReport>,
 }
 impl VerificationReport {
     pub fn pattern_count(&self) -> usize {
@@ -157,19 +273,19 @@ impl VerificationReport {
 }
 
 #[derive(Debug, Serialize)]
-struct PatternReport {
-    pattern: String,
-    entries: Vec<VerificationEntry>,
-    passed: bool,
+pub(crate) struct PatternReport {
+    pub(crate) pattern: String,
+    pub(crate) entries: Vec<VerificationEntry>,
+    pub(crate) passed: bool,
 }
 #[derive(Debug, Serialize)]
-struct VerificationEntry {
-    language: String,
-    source: String,
-    nodes: usize,
-    primary_intent: Option<String>,
-    confidence: Option<u8>,
-    semantic_pipeline: Vec<String>,
+pub(crate) struct VerificationEntry {
+    pub(crate) language: String,
+    pub(crate) source: String,
+    pub(crate) nodes: usize,
+    pub(crate) primary_intent: Option<String>,
+    pub(crate) confidence: Option<u8>,
+    pub(crate) semantic_pipeline: Vec<String>,
 }
 
 #[derive(Debug)]
@@ -281,7 +397,7 @@ pub fn run() -> Result<VerificationReport, VerificationError> {
                 language: (*language).to_owned(),
                 source: (*relative).to_owned(),
                 nodes: graph.len(),
-                primary_intent: primary.map(|hypothesis| hypothesis.id.clone()),
+                primary_intent: matching_function.primary_intent.clone(),
                 confidence: primary.map(|hypothesis| hypothesis.confidence),
                 semantic_pipeline: matching_function
                     .semantic_pipeline

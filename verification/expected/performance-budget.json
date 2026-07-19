@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "max_average_benchmark_nanos": 1000000000,
+  "max_cold_query_nanos": 5000000000,
+  "max_warm_query_nanos": 5000000000
+}
