@@ -1,5 +1,8 @@
 name: CI
 
+permissions:
+  contents: read
+
 on:
   push:
   pull_request:
@@ -10,15 +13,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Frontend prerequisites
+        run: |
+          python3 --version
+          javac -version
+          clang --version
       - name: Format
         run: cargo fmt --all -- --check
       - name: Lint
-        run: cargo clippy --workspace -- -D warnings
+        run: cargo clippy --workspace --locked -- -D warnings
       - name: Test
-        run: cargo test --workspace
+        run: cargo test --workspace --locked
       - name: Verify
-        run: cargo run -p vz-cli -- verify
+        run: cargo run --locked -p vz-cli -- verify
       - name: Validate
-        run: cargo run -p vz-cli -- validate
+        run: cargo run --locked -p vz-cli -- validate
       - name: Benchmark
-        run: cargo run -p vz-cli -- benchmark
+        run: cargo run --locked -p vz-cli -- benchmark

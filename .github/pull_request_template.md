@@ -8,6 +8,7 @@ Describe the problem and the change.
 - [ ] `cargo clippy --workspace --offline -- -D warnings`
 - [ ] `cargo test --workspace --offline`
 - [ ] `vz verify`
+- [ ] `vz validate`
 - [ ] Documentation and benchmark impact reviewed where applicable
 
 ## Architecture

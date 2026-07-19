@@ -3,6 +3,11 @@
 Vinglish Zero includes a small deterministic benchmark harness for the current
 pipeline.
 
+This harness measures the Vinglish Zero repository itself. It is distinct from
+the [cross-benchmark study](benchmarks/cross-benchmark-study.md), which
+summarizes independent comparisons of generated Python systems and does not
+measure `vz` performance.
+
 Run it from the repository root:
 
 ```bash

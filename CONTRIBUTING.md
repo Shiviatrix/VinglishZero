@@ -17,6 +17,7 @@ cargo fmt --all -- --check
 cargo clippy --workspace --offline -- -D warnings
 cargo test --workspace --offline
 cargo run -p vz-cli --offline -- verify
+cargo run -p vz-cli --offline -- validate
 cargo run -p vz-cli --offline -- benchmark
 ```
 
