@@ -53,6 +53,11 @@ Semantic IR
    whose stages are all active hypotheses. See
    [semantic composition](semantic-composition.md).
 
+`vz explain` renders this report directly. For every function it presents the
+primary intent and confidence, any recognized pipeline, the observed evidence,
+the strongest active alternatives, and a bounded summary of constraint
+eliminations. It does not inspect source text after lowering.
+
 ## Determinism
 
 The pipeline uses no random input. Semantic graph traversal uses the graph's

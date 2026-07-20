@@ -69,7 +69,7 @@ fn fake_compiler(directory: &TemporaryDirectory, name: &str, body: &str) -> Path
 }
 
 #[test]
-fn existing_json_workflow_remains_unchanged() {
+fn existing_json_workflow_renders_the_deterministic_intent_explanation() {
     let output = run(&[
         "explain",
         concat!(
@@ -81,7 +81,7 @@ fn existing_json_workflow_remains_unchanged() {
     assert!(output.status.success());
     assert_eq!(
         String::from_utf8(output.stdout).unwrap().trim_end(),
-        include_str!("../../../tests/fixtures/accumulate-v1.explanation.txt").trim_end()
+        include_str!("../../../tests/fixtures/accumulate-v1.intent.txt").trim_end()
     );
 }
 
@@ -89,9 +89,9 @@ fn existing_json_workflow_remains_unchanged() {
 fn help_is_actionable_and_unknown_commands_fail() {
     let help = run(&["--help"]);
     assert!(help.status.success());
-    assert!(String::from_utf8(help.stdout)
-        .unwrap()
-        .contains("vz explain <source>"));
+    let help = String::from_utf8(help.stdout).unwrap();
+    assert!(help.contains("vz explain <source>"));
+    assert!(help.contains("vz cache stats"));
 
     let unknown = run(&["unknown-command"]);
     assert_eq!(unknown.status.code(), Some(2));

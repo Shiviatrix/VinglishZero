@@ -1,0 +1,23 @@
+Vinglish Zero semantic explanation
+
+Function: calculate
+Primary intent: Accumulator (85%)
+Semantic pipeline: none
+Observed evidence:
+  - loop [Control Flow; strength 1]
+  - return [Control Flow; strength 1]
+  - assignment [Mutation; strength 1]
+  - mutation [Mutation; strength 1]
+  - addition mutation [Mutation; strength 1]
+  - accumulation [Mutation; strength 1]
+  - name token 'calculate' [Naming; strength 1]
+  - numeric return [Type; strength 1]
+Other active hypotheses:
+  - Sum (40%)
+  - Mapper (30%)
+  - Frequency Counter (10%)
+Constraint eliminations:
+  - Builder: missing allocation (Allocation)
+  - Counter: missing increment mutation (Increment)
+  - Iterator: missing collection iteration (Collection)
+  - 30 additional hypotheses eliminated

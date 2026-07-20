@@ -309,6 +309,164 @@ impl SemanticNode {
             | Self::Extension { id, .. } => *id,
         }
     }
+
+    /// Returns every graph-local node referenced by this node.
+    ///
+    /// The order follows the semantic structure of the node and is stable.
+    /// This is the common traversal boundary used by graph validation and
+    /// tooling; it intentionally exposes relationships without exposing any
+    /// adapter or source-language detail.
+    pub fn referenced_ids(&self) -> Vec<NodeId> {
+        match self {
+            Self::Program { modules, .. }
+            | Self::Module {
+                children: modules, ..
+            }
+            | Self::Namespace {
+                children: modules, ..
+            }
+            | Self::Function { body: modules, .. }
+            | Self::Collection {
+                elements: modules, ..
+            } => modules.clone(),
+            Self::Lambda { body, captured, .. } => {
+                let mut references = Vec::with_capacity(body.len() + captured.len());
+                references.extend(body.iter().copied());
+                references.extend(captured.iter().copied());
+                references
+            }
+            Self::Variable { initializer_id, .. }
+            | Self::Return {
+                value: initializer_id,
+                ..
+            }
+            | Self::Allocation {
+                initializer: initializer_id,
+                ..
+            } => initializer_id.iter().copied().collect(),
+            Self::Identifier { resolved_to, .. } => resolved_to.iter().copied().collect(),
+            Self::BinaryOp { left, right, .. }
+            | Self::Assignment {
+                target: left,
+                value: right,
+                ..
+            }
+            | Self::IndexAccess {
+                object: left,
+                index: right,
+                ..
+            } => vec![*left, *right],
+            Self::UnaryOp { operand, .. }
+            | Self::FieldAccess {
+                object: operand, ..
+            }
+            | Self::Reference {
+                target: operand, ..
+            }
+            | Self::Dereference {
+                target: operand, ..
+            }
+            | Self::Drop {
+                target: operand, ..
+            }
+            | Self::Async { inner: operand, .. }
+            | Self::ApiUsage {
+                call_node: operand, ..
+            } => vec![*operand],
+            Self::Call {
+                callee, arguments, ..
+            } => {
+                let mut references = Vec::with_capacity(arguments.len() + 1);
+                references.push(*callee);
+                references.extend(arguments.iter().map(|argument| argument.value));
+                references
+            }
+            Self::MapLiteral { entries, .. } => entries
+                .iter()
+                .flat_map(|(key, value)| [*key, *value])
+                .collect(),
+            Self::StructLiteral { fields, .. } => fields.iter().map(|(_, value)| *value).collect(),
+            Self::Conditional {
+                condition,
+                then_body,
+                else_body,
+                ..
+            } => {
+                let mut references = Vec::with_capacity(
+                    1 + then_body.len() + else_body.as_ref().map_or(0, Vec::len),
+                );
+                references.push(*condition);
+                references.extend(then_body.iter().copied());
+                if let Some(else_body) = else_body {
+                    references.extend(else_body.iter().copied());
+                }
+                references
+            }
+            Self::Loop { kind, body, .. } => {
+                let mut references = Vec::with_capacity(body.len() + 1);
+                match kind {
+                    LoopKind::While { condition } => references.push(*condition),
+                    LoopKind::ForEach { iterable, .. } => references.push(*iterable),
+                    LoopKind::Count { times } => references.push(*times),
+                    LoopKind::Infinite => {}
+                }
+                references.extend(body.iter().copied());
+                references
+            }
+            Self::PatternMatch {
+                subject,
+                arms,
+                otherwise,
+                ..
+            } => {
+                let capacity = 1
+                    + arms
+                        .iter()
+                        .map(|arm| arm.body.len() + usize::from(arm.guard.is_some()))
+                        .sum::<usize>()
+                    + otherwise.as_ref().map_or(0, Vec::len);
+                let mut references = Vec::with_capacity(capacity);
+                references.push(*subject);
+                for arm in arms {
+                    if let Some(guard) = arm.guard {
+                        references.push(guard);
+                    }
+                    references.extend(arm.body.iter().copied());
+                }
+                if let Some(otherwise) = otherwise {
+                    references.extend(otherwise.iter().copied());
+                }
+                references
+            }
+            Self::Transaction {
+                body,
+                on_commit,
+                on_rollback,
+                ..
+            } => {
+                let mut references = Vec::with_capacity(
+                    body.len()
+                        + on_commit.as_ref().map_or(0, Vec::len)
+                        + on_rollback.as_ref().map_or(0, Vec::len),
+                );
+                references.extend(body.iter().copied());
+                if let Some(on_commit) = on_commit {
+                    references.extend(on_commit.iter().copied());
+                }
+                if let Some(on_rollback) = on_rollback {
+                    references.extend(on_rollback.iter().copied());
+                }
+                references
+            }
+            Self::TypeDefinition { .. }
+            | Self::EnumDefinition { .. }
+            | Self::Literal { .. }
+            | Self::Break { .. }
+            | Self::Continue { .. }
+            | Self::Import { .. }
+            | Self::Extension { .. } => Vec::new(),
+        }
+    }
 }
 
 #[derive(Debug, Clone)]

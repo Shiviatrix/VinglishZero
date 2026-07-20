@@ -5,7 +5,7 @@ pub mod metadata;
 pub mod node;
 pub mod types;
 
-pub use graph::SemanticGraph;
+pub use graph::{GraphValidationError, SemanticGraph};
 pub use metadata::Metadata;
 pub use node::{
     AllocKind, AsyncKind, CollectionKind, LoopKind, SemanticNode, SemanticOp, SemanticUnOp,

@@ -57,6 +57,9 @@ impl VinglishAdapter {
             span: span(SourceRange::default()),
             metadata: Metadata::default(),
         });
+        graph
+            .validate()
+            .map_err(|error| ImportError::InvalidSemanticGraph(error.to_string()))?;
         Ok(graph)
     }
 
@@ -518,6 +521,7 @@ pub enum ImportError {
     InvalidJson(serde_json::Error),
     UnsupportedFormat(String),
     UnsupportedVersion(u32),
+    InvalidSemanticGraph(String),
 }
 
 impl ImportError {
@@ -535,6 +539,12 @@ impl fmt::Display for ImportError {
             }
             Self::UnsupportedVersion(version) => {
                 write!(formatter, "unsupported export version: {version}")
+            }
+            Self::InvalidSemanticGraph(message) => {
+                write!(
+                    formatter,
+                    "invalid Vinglish semantic export graph: {message}"
+                )
             }
         }
     }

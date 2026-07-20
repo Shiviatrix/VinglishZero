@@ -33,12 +33,27 @@ binary prefix/suffix delta beside a changed blob. A delta records prefix length,
 removed length, suffix length, and replacement bytes. Applying it reconstructs
 the next semantic blob exactly; it never operates on source or AST data.
 
-Unchanged blobs are byte-compared and never rewritten. Cache invalidation is
-limited to a changed semantic hash or a cache, Semantic IR, reasoning engine,
-or hypothesis-registry version change.
+Unchanged blobs are byte-compared and never rewritten. Changed blobs and their
+delta records are written through a flushed sibling temporary file and renamed
+only after the full content exists, so an interrupted write cannot expose a
+truncated cache artifact. On Windows, where replacement rename semantics differ,
+the fallback can briefly produce a cache miss but never publishes partial data.
+Cache invalidation is limited to a changed semantic hash or a cache, Semantic
+IR, reasoning engine, or hypothesis-registry version change.
+
+Malformed cache blobs are disposable. Repository queries preserve valid entries,
+report invalid blobs in `skipped`, and reanalyze the corresponding source as
+needed. `vz stats` (or `vz cache stats`) reads only the persistent cache and
+reports compatible, incompatible, and invalid blob counts without invoking a
+frontend.
 
 ## Query Integration
 
 `vz query` reads valid cache entries before selecting a frontend. This lets warm
-repository queries operate directly on persisted semantic reports. Unavailable
-frontends do not block a query when their cache entry remains valid.
+repository queries operate directly on persisted semantic reports. Extension
+points without an operational frontend are excluded from source discovery until
+they can emit Semantic IR.
+
+`vz profile` uses a fresh isolated cache for its cold run and reuses that exact
+cache for the warm run. This makes the reported cold/warm comparison independent
+of existing local cache state and leaves the persistent query cache untouched.

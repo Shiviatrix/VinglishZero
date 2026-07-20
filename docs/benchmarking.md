@@ -52,7 +52,15 @@ The corpus also includes the cross-language `Filter -> Map -> Reduce`
 composition case, so the reported reasoning timing includes deterministic
 pipeline selection.
 
-For cache benchmarks, run the same `vz query` twice. The first run builds
-semantic blobs; the second reports cache hits and avoids frontend work. The
-structured query report includes cold/warm latency, analyzed-file count, cache
-hits, and cache misses.
+For a controlled cache comparison, run:
+
+```bash
+cargo run -p vz-cli -- profile
+```
+
+`vz profile` creates an isolated empty cache for its cold pass, then reuses the
+same blobs for the warm pass. Its JSON and Markdown reports include cold/warm
+latency, analyzed-file counts, cache hits and misses, semantic blob sizes, and
+binary delta size. This avoids conflating prior repository cache state with a
+performance measurement. Use `vz stats` or `vz cache stats` to inspect the
+normal persistent cache without invoking a frontend.

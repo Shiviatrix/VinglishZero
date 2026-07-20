@@ -233,6 +233,8 @@ pub fn default_registry() -> HypothesisRegistry {
             require("conditional", EvidenceKind::Conditional),
             require("increment", EvidenceKind::IncrementMutation),
             support("count_name", name_token("count"), 55),
+            support("conditional", EvidenceKind::Conditional, 20),
+            support("increment", EvidenceKind::IncrementMutation, 20),
         ],
     ));
     registry.register(hypothesis(
@@ -317,6 +319,7 @@ pub fn default_registry() -> HypothesisRegistry {
             require("selection_update", EvidenceKind::MaximumUpdate),
             support("max_name", name_token("max"), 40),
             support("by_name", name_token("by"), 45),
+            support("selection_update", EvidenceKind::MaximumUpdate, 20),
         ],
     ));
     registry.register(hypothesis(
@@ -326,6 +329,7 @@ pub fn default_registry() -> HypothesisRegistry {
             require("selection_update", EvidenceKind::MinimumUpdate),
             support("min_name", name_token("min"), 40),
             support("by_name", name_token("by"), 45),
+            support("selection_update", EvidenceKind::MinimumUpdate, 20),
         ],
     ));
     registry.register(hypothesis(

@@ -6,7 +6,7 @@ agnostic.
 
 ```mermaid
 flowchart TD
-  Source["Source code or HIR"] --> Adapter["Language adapter"]
+  Source["Source code or compiler-owned transport"] --> Adapter["Language adapter"]
   Adapter --> IR["Semantic IR"]
   IR --> Engine["Semantic engine"]
   Engine --> Diagnostics["Diagnostics"]
@@ -16,7 +16,10 @@ flowchart TD
 
 ## Boundary Rules
 
-- Adapters translate syntax or HIR into shared semantic concepts.
+- Adapters translate source through their frontend, or consume an explicit
+  compiler-owned transport contract, into shared semantic concepts.
+- Every adapter result is validated for graph-local identifiers and dangling
+  semantic references before any engine consumes it.
 - Semantic IR carries meaning, relationships, and provenance, not compiler
   implementation details.
 - The engine consumes only Semantic IR.

@@ -1,0 +1,27 @@
+{
+  "name": "vinglish-zero-launch-film",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A three-minute Remotion launch film for Vinglish Zero.",
+  "scripts": {
+    "dev": "remotion studio src/index.ts",
+    "render": "npm run assets && remotion render src/index.ts VinglishZeroLaunch out/vinglish-zero-launch.mp4 --codec=h264 --crf=17 --concurrency=6",
+    "render:preview": "npm run assets && remotion render src/index.ts VinglishZeroLaunch out/vinglish-zero-preview.mp4 --codec=h264 --crf=23 --scale=0.5 --concurrency=6",
+    "still": "npm run assets && remotion still src/index.ts VinglishZeroLaunch out/keyframe.png --frame=2250",
+    "assets": "node scripts/generate-audio.mjs && bash scripts/generate-narration.sh",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.0",
+    "@remotion/media-utils": "^4.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.6.0"
+  }
+}

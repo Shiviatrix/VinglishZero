@@ -466,6 +466,23 @@ fn assert_active(name: &str, returns_boolean: bool, shape: CollectionPatternShap
         }));
 }
 
+fn assert_primary(
+    name: &str,
+    returns_boolean: bool,
+    shape: CollectionPatternShape,
+    expected: &str,
+) {
+    let report = ReasoningEngine::new().analyze(&graph_with_collection_pattern(
+        name,
+        returns_boolean,
+        shape,
+    ));
+    assert_eq!(
+        report.function_reports[0].primary_intent.as_deref(),
+        Some(expected)
+    );
+}
+
 #[test]
 fn collection_pattern_hypotheses_are_deterministic_semantic_rules() {
     use CollectionPatternShape::{
@@ -551,6 +568,18 @@ fn collection_pattern_hypotheses_are_deterministic_semantic_rules() {
         Conditional { early_return: true },
         "contains",
     );
+}
+
+#[test]
+fn named_specializations_win_when_their_structural_requirements_hold() {
+    assert_primary(
+        "count_if",
+        false,
+        CollectionPatternShape::ConditionalIncrement,
+        "count_if",
+    );
+    assert_primary("max_by", false, CollectionPatternShape::Maximum, "max_by");
+    assert_primary("min_by", false, CollectionPatternShape::Minimum, "min_by");
 }
 
 #[test]

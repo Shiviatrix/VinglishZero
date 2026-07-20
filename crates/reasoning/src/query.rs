@@ -9,6 +9,12 @@ use crate::{
     report::{FunctionIntentReport, HypothesisStatus, IntentReport},
 };
 
+/// A primary intent or pipeline stage is always queryable. A non-primary
+/// hypothesis is a useful repository match only once deterministic rule
+/// scoring has reached this confidence floor; otherwise it remains visible in
+/// the detailed report without flooding a semantic search with weak aliases.
+const QUERY_HYPOTHESIS_CONFIDENCE_FLOOR: u8 = 50;
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum QueryExpression {
     Term(String),
@@ -63,6 +69,8 @@ pub fn parse(input: &str) -> Result<QueryExpression, QueryError> {
         .to_ascii_lowercase()
         .replace("maximum finder", "maximum")
         .replace("minimum finder", "minimum")
+        .replace("max by", "max_by")
+        .replace("min by", "min_by")
         .replace("binary search", "binary_search")
         .replace("group by", "group_by")
         .replace("count if", "count_if")
@@ -161,7 +169,7 @@ fn canonical(token: &str) -> String {
         .trim_matches(|character: char| !character.is_ascii_alphanumeric() && character != '_')
     {
         "reducers" | "reduce" => "reducer".to_owned(),
-        "maps" | "mapping" => "mapper".to_owned(),
+        "map" | "maps" | "mapping" => "mapper".to_owned(),
         "filters" | "filtering" => "filter".to_owned(),
         "recursive" => "recursion".to_owned(),
         "normalization" | "normalizes" => "normalize".to_owned(),
@@ -283,7 +291,10 @@ fn evaluate_term(term: &str, function: &FunctionIntentReport) -> Option<Evaluati
         }
     }
     for hypothesis in &function.hypotheses {
-        if hypothesis.id == term && hypothesis.status == HypothesisStatus::Active {
+        if hypothesis.id == term
+            && hypothesis.status == HypothesisStatus::Active
+            && hypothesis.confidence >= QUERY_HYPOTHESIS_CONFIDENCE_FLOOR
+        {
             result.score += 60;
             result.fields.insert(QueryMatchField::Hypothesis {
                 id: term.to_owned(),
@@ -381,6 +392,17 @@ mod tests {
             parse("NOT recursive").unwrap(),
             QueryExpression::Not(_)
         ));
+        assert_eq!(
+            parse("filter THEN map").unwrap(),
+            QueryExpression::Then(
+                Box::new(QueryExpression::Term("filter".to_owned())),
+                Box::new(QueryExpression::Term("mapper".to_owned()))
+            )
+        );
+        assert_eq!(
+            parse("max by").unwrap(),
+            QueryExpression::Term("max_by".to_owned())
+        );
     }
 
     #[test]
@@ -392,5 +414,28 @@ mod tests {
             matches[0].semantic_pipeline,
             ["filter", "mapper", "reducer"]
         );
+    }
+
+    #[test]
+    fn weak_alternative_hypotheses_do_not_pollute_repository_queries() {
+        let function = FunctionIntentReport {
+            function_name: "calculate".to_owned(),
+            evidence: Vec::new(),
+            hypotheses: vec![HypothesisReport {
+                id: "histogram".to_owned(),
+                confidence: QUERY_HYPOTHESIS_CONFIDENCE_FLOOR - 1,
+                status: HypothesisStatus::Active,
+                supporting_evidence: Vec::new(),
+                rejected_evidence: Vec::new(),
+            }],
+            primary_intent: None,
+            semantic_pipeline: Vec::new(),
+        };
+        let report = IntentReport {
+            version: 1,
+            function_reports: vec![function],
+        };
+
+        assert!(search("fixture", &report, &parse("histogram").unwrap()).is_empty());
     }
 }

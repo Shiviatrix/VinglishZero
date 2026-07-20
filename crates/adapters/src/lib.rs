@@ -202,10 +202,20 @@ impl AdapterRegistry {
     }
 
     pub fn semantic_graph(&self, source: &Path) -> Result<SemanticGraph, RegistryLookupError> {
-        self.adapter_for(source)
-            .map_err(RegistryLookupError::Registry)?
+        let adapter = self
+            .adapter_for(source)
+            .map_err(RegistryLookupError::Registry)?;
+        let language = adapter.language();
+        let graph = adapter
             .semantic_graph(source)
-            .map_err(RegistryLookupError::Adapter)
+            .map_err(RegistryLookupError::Adapter)?;
+        graph.validate().map_err(|error| {
+            RegistryLookupError::Adapter(SourceAdapterError::AdapterFailure {
+                language,
+                message: format!("emitted an invalid SemanticGraph: {error}"),
+            })
+        })?;
+        Ok(graph)
     }
 }
 
@@ -316,5 +326,65 @@ impl SourceAdapter for UnavailableSourceAdapter {
             language: self.language,
             detail: self.detail.clone(),
         })
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use std::path::Path;
+
+    use vz_common::{LanguageTag, NodeId, SemanticSpan};
+    use vz_semantic_ir::{Metadata, SemanticNode};
+
+    use super::*;
+
+    struct MalformedAdapter;
+
+    impl SemanticAdapter for MalformedAdapter {
+        fn manifest(&self) -> AdapterManifest {
+            AdapterManifest::new("malformed", LanguageTag::Unknown, "test")
+        }
+
+        fn capabilities(&self) -> AdapterCapabilities {
+            AdapterCapabilities::new(true, false, true)
+        }
+    }
+
+    impl SourceAdapter for MalformedAdapter {
+        fn extensions(&self) -> &[&str] {
+            &["invalid"]
+        }
+
+        fn language(&self) -> &'static str {
+            "Malformed"
+        }
+
+        fn semantic_graph(&self, _source: &Path) -> Result<SemanticGraph, SourceAdapterError> {
+            let mut graph = SemanticGraph::new();
+            graph.insert(SemanticNode::Program {
+                id: NodeId::ROOT,
+                modules: vec![NodeId::new(1)],
+                span: SemanticSpan::dummy(),
+                metadata: Metadata::default(),
+            });
+            Ok(graph)
+        }
+    }
+
+    #[test]
+    fn registry_rejects_a_malformed_adapter_graph_before_engine_consumption() {
+        let mut registry = AdapterRegistry::new();
+        registry.register(MalformedAdapter).unwrap();
+
+        let error = registry
+            .semantic_graph(Path::new("example.invalid"))
+            .unwrap_err();
+        let RegistryLookupError::Adapter(SourceAdapterError::AdapterFailure { language, message }) =
+            error
+        else {
+            panic!("registry must report a malformed adapter result");
+        };
+        assert_eq!(language, "Malformed");
+        assert!(message.contains("references missing node"));
     }
 }

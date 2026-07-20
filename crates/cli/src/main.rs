@@ -1,17 +1,13 @@
 use std::{fs, path::Path, process};
 
-use vz_adapter_vinglish::VinglishAdapter;
 use vz_diagnostics::{CompilerDiagnostic, SemanticDiagnosticEngine};
 
 mod benchmark;
 mod profile;
 mod query;
 mod registry;
-mod transport_input;
 mod validation;
 mod verification;
-
-use transport_input::SemanticTransportAcquirer;
 
 fn main() {
     let mut args = std::env::args().skip(1);
@@ -32,8 +28,12 @@ fn main() {
                 eprintln!("usage: vz explain <source>");
                 process::exit(2);
             }
-            let graph = graph_for(&file);
-            print!("{}", vz_semantic_engine::explanation::explain(&graph));
+            let graph = match graph_for(&file) {
+                Ok(graph) => graph,
+                Err(error) => exit_with_error(error),
+            };
+            let report = vz_reasoning::ReasoningEngine::new().analyze(&graph);
+            print!("{}", vz_reasoning::render_explanation(&report));
         }
         Some("diagnose") => {
             let Some(diagnostic_file) = args.next() else {
@@ -63,7 +63,10 @@ fn main() {
                         process::exit(1);
                     }
                 };
-            let graph = graph_for(&transport_file);
+            let graph = match graph_for(&transport_file) {
+                Ok(graph) => graph,
+                Err(error) => exit_with_error(error),
+            };
             let intent_report = vz_reasoning::ReasoningEngine::new().analyze(&graph);
             let semantic_diagnostic = match SemanticDiagnosticEngine::new()
                 .diagnose(compiler_diagnostic, &intent_report)
@@ -106,18 +109,32 @@ fn main() {
             }
         }
         Some("profile") => match profile::run(Path::new(".")) {
-            Ok(report) => println!(
-                "{}",
-                serde_json::to_string_pretty(&report).unwrap_or_else(|_| "{}".to_owned())
-            ),
+            Ok(report) => match serde_json::to_string_pretty(&report) {
+                Ok(output) => println!("{output}"),
+                Err(error) => {
+                    eprintln!("cannot serialize performance profile: {error}");
+                    process::exit(1);
+                }
+            },
             Err(error) => {
                 eprintln!("profile failed: {error}");
                 process::exit(1);
             }
         },
-        Some("stats") | Some("cache") => {
-            println!("Use `vz profile` for persistent cache and repository performance statistics.")
+        Some("stats") => {
+            if args.next().is_some() {
+                eprintln!("usage: vz stats");
+                process::exit(2);
+            }
+            print_cache_stats();
         }
+        Some("cache") => match (args.next(), args.next()) {
+            (Some(command), None) if command == "stats" => print_cache_stats(),
+            _ => {
+                eprintln!("usage: vz cache stats");
+                process::exit(2);
+            }
+        },
         Some("verify") => match verification::run() {
             Ok(report) => println!("verified {} patterns", report.pattern_count()),
             Err(error) => {
@@ -152,7 +169,9 @@ fn main() {
         }
         Some(other) => {
             eprintln!("unknown command: {other}");
-            eprintln!("usage: vz <benchmark|diagnose|explain|profile|query|stats|validate|verify>");
+            eprintln!(
+                "usage: vz <benchmark|cache|diagnose|explain|profile|query|stats|validate|verify>"
+            );
             process::exit(2);
         }
         None => {
@@ -161,40 +180,35 @@ fn main() {
     }
 }
 
-fn graph_for(file: &str) -> vz_semantic_ir::SemanticGraph {
+fn graph_for(file: &str) -> Result<vz_semantic_ir::SemanticGraph, String> {
     let path = Path::new(file);
-    if path
-        .extension()
-        .and_then(|extension| extension.to_str())
-        .is_some_and(|extension| extension.eq_ignore_ascii_case("json"))
-    {
-        let input = SemanticTransportAcquirer::default()
-            .acquire(path)
-            .unwrap_or_else(|error| {
-                eprintln!("cannot obtain Vinglish semantic export: {error}");
-                process::exit(1);
-            });
-        return VinglishAdapter.import_json(&input).unwrap_or_else(|error| {
-            eprintln!("cannot import Vinglish semantic export: {error}");
-            process::exit(1);
-        });
-    }
     registry::default_registry()
-        .and_then(|registry| {
-            registry.semantic_graph(path).map_err(|error| match error {
-                vz_adapters::RegistryLookupError::Registry(error) => error,
-                vz_adapters::RegistryLookupError::Adapter(error) => {
-                    eprintln!("{error}");
-                    process::exit(1)
-                }
-            })
-        })
-        .unwrap_or_else(|error| {
-            eprintln!("{error}");
-            process::exit(1)
-        })
+        .map_err(|error| error.to_string())?
+        .semantic_graph(path)
+        .map_err(|error| error.to_string())
+}
+
+fn exit_with_error(error: String) -> ! {
+    eprintln!("{error}");
+    process::exit(1);
+}
+
+fn print_cache_stats() {
+    match profile::cache_stats(Path::new(".")) {
+        Ok(report) => match serde_json::to_string_pretty(&report) {
+            Ok(output) => println!("{output}"),
+            Err(error) => {
+                eprintln!("cannot serialize cache statistics: {error}");
+                process::exit(1);
+            }
+        },
+        Err(error) => {
+            eprintln!("cannot read semantic cache statistics: {error}");
+            process::exit(1);
+        }
+    }
 }
 
 fn print_help() {
-    println!("Vinglish Zero deterministic semantic analysis\n\nUsage:\n  vz explain <source>\n  vz diagnose <compiler-diagnostic.json> <source>\n  vz query <expression>\n  vz profile\n  vz stats\n  vz verify\n  vz validate\n  vz benchmark\n\nQueries scan registered source files and compiler transport fixtures in the current repository. Source extensions select a registered adapter. Vinglish JSON remains the stable compiler interoperability contract.");
+    println!("Vinglish Zero deterministic semantic analysis\n\nUsage:\n  vz explain <source>\n  vz diagnose <compiler-diagnostic.json> <source>\n  vz query <expression>\n  vz profile\n  vz stats\n  vz cache stats\n  vz verify\n  vz validate\n  vz benchmark\n\nQueries scan registered source files and compiler transport fixtures in the current repository. Source extensions select a registered adapter. `vz stats` reads the persistent semantic cache without invoking a frontend. Vinglish JSON remains the stable compiler interoperability contract.");
 }

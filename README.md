@@ -57,20 +57,26 @@ vz validate
 vz benchmark
 vz profile
 vz stats
+vz cache stats
 ```
 
-`vz explain` selects an adapter by extension. `vz query` searches deterministic
-intent reports, pipelines, evidence, and metadata. See the
+`vz explain` selects an adapter by extension and renders the resulting primary
+intent, observed evidence, active alternatives, and constraint eliminations.
+`vz query` searches deterministic intent reports, pipelines, evidence, and metadata. See the
 [source adapter contract](docs/architecture/source-adapters.md) and
 [semantic query design](docs/design/semantic-query.md).
+`vz stats` and `vz cache stats` return the current persistent-cache inventory
+without reparsing source or invoking a language frontend.
 
 ## Performance
 
-The checked-in benchmark measures 92 cross-language samples. The latest report
-records approximately 51 ms average frontend time, 1.1 ms average reasoning
-time, and 49 us average query matching time. A warm cached repository query
-avoids frontend work entirely. Results are machine-dependent; regenerate them
-with `vz benchmark` and `vz profile`.
+The built-in benchmark corpus contains 92 cross-language samples. `vz benchmark`
+records frontend, reasoning, query, and total timing per sample; `vz profile`
+measures an isolated cold pass followed by a warm pass over the exact cache
+blobs it created. This keeps warm-cache measurements independent of any prior
+local state. Results depend on host hardware and installed official frontends,
+so regenerate them with `vz benchmark` and `vz profile` rather than treating a
+checked-in number as a portable claim.
 
 ## Controlled Study
 
@@ -104,6 +110,7 @@ research/     Controlled-study protocol, generation harness, and analysis tools
 - [Semantic composition](docs/design/semantic-composition.md)
 - [Semantic query](docs/design/semantic-query.md)
 - [Incremental execution](docs/design/incremental-execution.md)
+- [Rendering Understanding research design](docs/design/rendering-understanding.md)
 - [Vinglish transport contract](docs/architecture/vinglish-transport.md)
 - [Cross-language verification](docs/cross-language-verification.md)
 - [Cross-benchmark study](docs/benchmarks/cross-benchmark-study.md)

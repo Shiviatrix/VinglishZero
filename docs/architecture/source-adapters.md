@@ -25,6 +25,12 @@ The registry rejects duplicate extensions, so selection is deterministic and
 never depends on registration order. The CLI contains no extension matching or
 language frontend behavior.
 
+Before returning an adapter result to a caller, the registry validates the
+`SemanticGraph`: every graph-local node identifier must be consistent and every
+referenced node must exist. The graph permits cycles and shared children, which
+are necessary semantic relationships, but rejects dangling references before
+reasoning or diagnostics can observe malformed IR.
+
 ## Current Frontends
 
 | Extensions | Adapter | Status | Frontend boundary |

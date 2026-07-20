@@ -58,6 +58,20 @@ flowchart LR
   Node --> Ext["Optional extension payload"]
 ```
 
+## Graph Integrity
+
+`SemanticGraph` stores nodes in deterministic identifier order. Producers can
+use checked insertion to reject a duplicate graph-local `NodeId`, and the
+registry validates every adapter result before it reaches the semantic engine.
+The backward-compatible insertion API records duplicate attempts so validation
+still rejects an overwritten node instead of silently accepting it. Validation
+checks declared node identity and all node-to-node references. It does not
+reject cycles or shared children: both represent valid semantic relationships
+such as recursive calls and reused values.
+
+`SemanticNode::referenced_ids` is the shared traversal surface for integrity
+checks and tooling. It exposes only language-neutral semantic relationships.
+
 ## Non-Goals
 
 - compiler lowering details

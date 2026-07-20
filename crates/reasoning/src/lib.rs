@@ -21,7 +21,9 @@ pub use facts::{FactExtractor, FactSet, FunctionFacts};
 pub use hypotheses::{HypothesisDefinition, HypothesisRegistry, RuleBasedHypothesis};
 pub use incremental::{CachedFunction, SemanticCache};
 pub use query::{parse as parse_query, search as search_query, QueryExpression, QueryMatch};
-pub use report::{FunctionIntentReport, HypothesisReport, IntentReport, SemanticStage};
+pub use report::{
+    render_explanation, FunctionIntentReport, HypothesisReport, IntentReport, SemanticStage,
+};
 
 /// A compatibility boundary for callers that schedule deterministic reasoning.
 #[derive(Debug, Clone, Default)]
