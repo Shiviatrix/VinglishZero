@@ -25,6 +25,8 @@ research/controlled-study/.workspaces/
 # Media and Videos
 /launch-video/
 /generated-images/
+/latex/
+
 *.mp4
 *.mov
 *.mkv
