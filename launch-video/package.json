@@ -5,10 +5,13 @@
   "description": "A three-minute Remotion launch film for Vinglish Zero.",
   "scripts": {
     "dev": "remotion studio src/index.ts",
-    "render": "npm run assets && remotion render src/index.ts VinglishZeroLaunch out/vinglish-zero-launch.mp4 --codec=h264 --crf=17 --concurrency=6",
-    "render:preview": "npm run assets && remotion render src/index.ts VinglishZeroLaunch out/vinglish-zero-preview.mp4 --codec=h264 --crf=23 --scale=0.5 --concurrency=6",
+    "render": "npm run render:4k",
+    "render:4k": "npm run assets && remotion render src/index.ts VinglishZeroLaunch out/vinglish-zero-launch-4k.mp4 --codec=h264 --crf=15 --pixel-format=yuv420p --concurrency=6",
+    "render:presenter": "npm run assets && remotion render src/index.ts VinglishZeroLaunch out/vinglish-zero-presenter-4k.mp4 --codec=h264 --crf=15 --pixel-format=yuv420p --concurrency=6 --props='{\"presenterSrc\":\"presenter.mp4\"}'",
+    "render:preview": "npm run assets && remotion render src/index.ts VinglishZeroLaunch out/vinglish-zero-preview.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p --scale=0.5 --concurrency=6",
     "still": "npm run assets && remotion still src/index.ts VinglishZeroLaunch out/keyframe.png --frame=2250",
-    "assets": "node scripts/generate-audio.mjs && bash scripts/generate-narration.sh",
+    "render:manim": "bash scripts/render-manim.sh",
+    "assets": "npm run render:manim && node scripts/generate-audio.mjs && bash scripts/generate-narration.sh",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

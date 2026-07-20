@@ -12,7 +12,7 @@ export const RemotionRoot = () => {
       fps={FPS}
       width={WIDTH}
       height={HEIGHT}
-      defaultProps={{showCaptions: false}}
+      defaultProps={{showCaptions: false, presenterSrc: undefined}}
     />
   );
 };

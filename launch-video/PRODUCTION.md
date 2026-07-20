@@ -2,50 +2,78 @@
 
 ## Master
 
-- Runtime: 179.9 seconds, leaving encoder-padding headroom inside the 2:55–3:00 requirement.
-- Format: 1920×1080, 30 fps, H.264, CRF 17.
+- Runtime: 179 seconds at 3840×2160, 30 fps, safely below the upload limit.
 - Composition: `VinglishZeroLaunch`.
-- Render: `npm run render`.
+- 4K final render: `npm run render:4k`.
+- 4K final render with presenter: `npm run render:presenter`.
+- Captions: upload `public/narration.srt` with the YouTube video.
+- The supplied macOS voice is only a timing reference. Record the narration
+  yourself and replace the generated `public/audio/narration-*.wav` files.
+- Presenter footage is muted by design. Use its matching recording as the
+  source for the final narration tracks; this avoids a double-audio render.
 
-## Visual Identity
+## Visual Direction
 
-- Ground: deep charcoal drafting field with sandstone construction rules.
-- Surfaces: opaque warm-ivory annotation plates with hard printed offsets.
-- Semantic accents: peacock teal, marigold saffron, emerald, vermilion, and muted sandstone.
-- Motion language: measured assembly, drawn connectors, and physical registration rather than glow, glass, or particle effects.
-- Logo: the shipped `vinglish-zero.svg` is copied into the render public directory by the asset step. The ending lets the semantic graph disappear into a traced construction of the official mark before revealing the SVG itself.
+The visual system uses a plain matte-black ground, saffron as the primary
+accent, warm-grey surfaces, and occasional pastel proof accents. There are no
+gradients, glass panels, texture fields, or background ornamentation. Every
+animated mark must explain a real system boundary or a real reasoning step.
+Manim handles the explanatory transformations, so the animation has the
+deliberate, mathematical feel of a technical essay rather than a dashboard
+demo. Remotion keeps your face, the real code, and the actual CLI vocabulary in
+the edit.
 
-## Timeline
+Avoid generic tech-film habits: floating code rain, exaggerated neon, terminal
+wallpaper, decorative gradient light, faded logo watermarks, and a permanent
+presenter thumbnail. Keep each proof visual sparse and self-contained.
 
-| Time | Beat | Source of truth |
-| --- | --- | --- |
-| 00:00–00:08 | Logo-led launch title resolving into the Python hook | official SVG and `examples/python/compositions.py` |
-| 00:08–00:30 | Python, Java, C, Vinglish syntax | shipped composition examples |
-| 00:30–00:55 | Shared semantic pipeline | verified composition pipeline |
-| 00:55–01:35 | Facts, evidence, activated/rejected hypotheses | reasoning model and fixtures |
-| 01:35–01:55 | Type mismatch interpretation | `vz diagnose` fixture output |
-| 01:55–02:15 | Filter → mapper → reducer composition | composition fixture |
-| 02:15–02:30 | Byte-stable report demonstration | repeated `vz diagnose` SHA-256 |
-| 02:30–02:45 | Engineering depth | repository structure and verification surface |
-| 02:45–02:59.9 | Graph pull-back and repository URL | Git remote |
+## Locked Timeline
 
-## Narration and Captions
+| Time | Speaker beat | Visual | Evidence source |
+| --- | --- | --- | --- |
+| 00:00–00:15 | Four versions of one behavior | You on camera; direct opening question | `examples/*/compositions.*` |
+| 00:15–00:29 | Syntax is not the stable part | Minimal Python/Java/C/Vinglish code comparison | shipped examples |
+| 00:29–00:52 | Shared Semantic Graph | Manim convergence and `Filter → Map → Reduce` | adapter boundary, composition report |
+| 00:52–01:18 | Deterministic reasoning | Manim facts → evidence → active/rejected hypotheses | `crates/reasoning`, live `vz explain` output |
+| 01:18–01:44 | Semantic diagnostics | Manim reframe of type mismatch | `tests/fixtures/type-mismatch.json`, `vz diagnose` |
+| 01:44–02:06 | Reproducibility and boundary | Manim repeated report; compact presenter | deterministic tests, `vz verify` |
+| 02:06–02:31 | How Codex/GPT-5.6 helped | You on camera; concrete engineering artifacts | Rust workspace and verification corpus |
+| 02:31–02:49 | Semantic query | Real CLI syntax and report-shaped result | `vz query` design and CLI |
+| 02:49–02:59 | Close | Logo, repository URL, compact presenter | shipped SVG and repository remote |
 
+## Factual Guardrails
+
+- Say “Python, Java, C, and Vinglish transport” when describing the verified
+  cross-language corpus. Do not imply the unavailable registry placeholders are
+  supported frontends.
+- Say “Semantic Graph” only as the current public product term. The Rust crate
+  is named `semantic-ir`; the film does not claim a different architecture.
+- “Byte-stable” describes repeated reasoning reports for identical input,
+  demonstrated by the deterministic test suite.
+- The `type mismatch` segment uses the actual `TYPE_MISMATCH` fixture and the
+  produced `accumulator_type_conflict` interpretation. Do not replace it with a
+  simulated error.
+- The Codex/GPT-5.6 segment explains implementation assistance, not inference
+  at runtime. Vinglish Zero's reasoning path is deterministic and contains no
+  model, embedding, or remote-service call.
+
+## Recording Direction
+
+- Start conversationally, as if inviting the viewer to look at a small code
+  puzzle with you. Do not announce the project like a pitch deck.
+- Pause after “the behavior is the same,” “not an AI guess,” and “byte-stable.”
+  Those are the three ideas the audience should retain.
+- In the Codex segment, speak plainly and specifically. The credibility comes
+  from the boundary: Codex accelerated the build; deterministic rules make the
+  final product conclusion inspectable.
+- Deliver the final line softly and leave half a second of quiet before the
+  music resolves.
+
+## Source Assets
+
+- Official mark: `../vinglish-zero.svg`, copied by `scripts/generate-audio.mjs`.
+- Manim source: `manim/semantic_story.py`.
+- Rendered Manim clips: `public/manim/` (generated, not committed).
 - Narration script: `public/narration.txt`.
-- YouTube caption upload: `public/narration.srt`.
-- Local preview voice: macOS `Samantha`, generated at 140 words per minute.
-- Replace only the generated `public/audio/narration-*.wav` files for a studio voiceover; timing remains unchanged.
-
-## Sound Design
-
-- `ambient.wav`: low, deterministic generative room tone.
-- `click.wav`: language/front-end and repeat-run arrivals.
-- `rise.wav`: semantic convergence and final pull-back.
-- `pulse.wav`: hypothesis and composition activation.
-- `error.wav`: diagnostic transition.
-
-All cues are synthesized locally by `scripts/generate-audio.mjs`; no third-party audio asset is required.
-
-## Integrity
-
-The determinism frame uses the actual SHA-256 prefix `f81f…2b97`, obtained by running the shipped `vz diagnose` command twice against `tests/fixtures/type-mismatch.json` and `tests/fixtures/accumulate-v1.json`. The verified remote shown in the final frame is `github.com/Shiviatrix/VinglishZero`.
+- Accessibility captions: `public/narration.srt`.
+- Presenter footage: `public/presenter.mp4` (local and ignored).

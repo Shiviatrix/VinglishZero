@@ -83,7 +83,7 @@ await writeWav('error.wav', tone(0.7, (time) => {
   return signal * envelope(time, 0.7, 0.01, 0.35) * 0.17;
 }));
 
-for (let index = 1; index <= 10; index += 1) {
+for (let index = 1; index <= 9; index += 1) {
   const filename = `narration-${String(index).padStart(2, '0')}.wav`;
   await writeWav(filename, tone(0.12, () => 0));
 }

@@ -1,23 +1,26 @@
 export const FPS = 30;
-export const WIDTH = 1920;
-export const HEIGHT = 1080;
-export const DURATION = 179 * FPS + 27;
+// The layout is authored on a stable design canvas and rendered at 4K.
+export const DESIGN_WIDTH = 1920;
+export const DESIGN_HEIGHT = 1080;
+export const WIDTH = DESIGN_WIDTH * 2;
+export const HEIGHT = DESIGN_HEIGHT * 2;
+// Keep the rendered film safely below the Build Week three-minute limit.
+export const DURATION = 179 * FPS;
 
 export const COLORS = {
-  background: '#24231F',
-  surface: '#F2E8D8',
-  surfaceRaised: '#E2D1B8',
-  grid: '#675F53',
-  text: '#F7F0E5',
-  ink: '#28241F',
-  muted: '#BFAF98',
-  faint: '#8B7D6A',
-  blue: '#B08A5A',
-  cyan: '#2E706C',
-  violet: '#BD7A1C',
-  green: '#4B7453',
-  amber: '#C88722',
-  red: '#A84A36',
+  background: '#0D0C0B',
+  surface: '#E7E1D8',
+  surfaceRaised: '#C8C0B6',
+  text: '#F5F0E8',
+  ink: '#191612',
+  muted: '#B4AEA4',
+  faint: '#7B756C',
+  blue: '#A6C7D7',
+  cyan: '#9BC6B8',
+  violet: '#D7A9B1',
+  green: '#B8C991',
+  amber: '#E38A36',
+  red: '#D17C62',
 } as const;
 
 export type CodeLanguage = 'PYTHON' | 'JAVA' | 'C' | 'VINGLISH';
@@ -55,57 +58,59 @@ export const codeSamples: Record<CodeLanguage, string[]> = {
     '}',
   ],
   VINGLISH: [
-    'function filter_map_reduce(values) -> integer {',
-    '    mutable result: integer = 0',
-    '    while has_more {',
-    '        if value > 0 {',
-    '            result = combine(',
-    '                result, transform(value))',
-    '        }',
-    '    } return result',
-    '}',
+    'function sum_positive(number count)',
+    'returns number',
+    'begin',
+    '    let mutable total be 0',
+    '    let mutable index be 0',
+    '    repeat while index < count',
+    '    begin',
+    '        if index > 0',
+    '            total += index',
+    '        index += 1',
+    '    end',
+    '    return total',
+    'end',
   ],
 };
 
 export const codeColors: Record<CodeLanguage, string> = {
-  PYTHON: '#5ea9ff',
-  JAVA: '#f5bd57',
-  C: '#a78bfa',
-  VINGLISH: '#69e4dc',
+  PYTHON: COLORS.blue,
+  JAVA: COLORS.amber,
+  C: COLORS.violet,
+  VINGLISH: COLORS.cyan,
 };
 
 export const cueFrames = {
   hook: 0,
-  languages: 8 * FPS,
-  reveal: 30 * FPS,
-  engine: 55 * FPS,
-  diagnostics: 95 * FPS,
-  composition: 115 * FPS,
-  determinism: 135 * FPS,
-  depth: 150 * FPS,
-  ending: 165 * FPS,
+  syntax: 15 * FPS,
+  semanticLift: 29 * FPS,
+  reasoning: 52 * FPS,
+  diagnostics: 78 * FPS,
+  determinism: 104 * FPS,
+  codex: 126 * FPS,
+  query: 151 * FPS,
+  ending: 169 * FPS,
 } as const;
 
 export const narrationTracks = [
   {from: 0, file: 'audio/narration-01.wav'},
-  {from: 8, file: 'audio/narration-02.wav'},
-  {from: 30, file: 'audio/narration-03.wav'},
-  {from: 43, file: 'audio/narration-04.wav'},
-  {from: 55, file: 'audio/narration-05.wav'},
-  {from: 95, file: 'audio/narration-06.wav'},
-  {from: 115, file: 'audio/narration-07.wav'},
-  {from: 135, file: 'audio/narration-08.wav'},
-  {from: 150, file: 'audio/narration-09.wav'},
-  {from: 165, file: 'audio/narration-10.wav'},
+  {from: 15, file: 'audio/narration-02.wav'},
+  {from: 29, file: 'audio/narration-03.wav'},
+  {from: 52, file: 'audio/narration-04.wav'},
+  {from: 78, file: 'audio/narration-05.wav'},
+  {from: 104, file: 'audio/narration-06.wav'},
+  {from: 126, file: 'audio/narration-07.wav'},
+  {from: 151, file: 'audio/narration-08.wav'},
+  {from: 169, file: 'audio/narration-09.wav'},
 ];
 
 export const soundCues = [
-  {from: 8.0, file: 'audio/click.wav', volume: 0.16},
-  {from: 30.0, file: 'audio/rise.wav', volume: 0.2},
-  {from: 43.0, file: 'audio/pulse.wav', volume: 0.16},
-  {from: 55.0, file: 'audio/rise.wav', volume: 0.16},
-  {from: 95.0, file: 'audio/error.wav', volume: 0.12},
-  {from: 115.0, file: 'audio/pulse.wav', volume: 0.16},
-  {from: 135.0, file: 'audio/click.wav', volume: 0.16},
-  {from: 165.0, file: 'audio/rise.wav', volume: 0.16},
+  {from: 15, file: 'audio/click.wav', volume: 0.12},
+  {from: 29, file: 'audio/rise.wav', volume: 0.13},
+  {from: 52, file: 'audio/pulse.wav', volume: 0.12},
+  {from: 78, file: 'audio/error.wav', volume: 0.1},
+  {from: 104, file: 'audio/click.wav', volume: 0.1},
+  {from: 151, file: 'audio/pulse.wav', volume: 0.12},
+  {from: 169, file: 'audio/rise.wav', volume: 0.14},
 ];

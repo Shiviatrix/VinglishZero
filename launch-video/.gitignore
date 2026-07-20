@@ -3,3 +3,6 @@ out/
 public/audio/*.wav
 public/audio/*.aiff
 public/audio/.generated
+public/manim/*.mp4
+public/presenter.mp4
+.manim-media/

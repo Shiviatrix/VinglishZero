@@ -11,16 +11,15 @@ if ! command -v say >/dev/null 2>&1 || ! command -v afconvert >/dev/null 2>&1; t
 fi
 
 segments=(
-  "Vinglish Zero. Deterministic semantic reasoning for source code."
-  "Now look at the same behavior in four languages. Different syntax. Different frontends. The same underlying intent."
-  "Vinglish Zero lowers each one into a shared semantic representation. The code disappears. The meaning remains."
-  "Filter. Map. Reduce. One ordered semantic pipeline, recovered without a model, embeddings, or a remote service."
-  "Here is the reasoning path. Source becomes Semantic I R. I R becomes facts. Facts produce evidence. Evidence activates compatible hypotheses and eliminates the rest. The result is not a guess. It is an inspectable conclusion."
-  "The same evidence can interpret a failure. A type mismatch inside an accumulator is not just an error string. It conflicts with the inferred accumulator contract, so the diagnostic explains the semantic role that broke."
-  "On a larger function, multiple patterns remain separate and ordered. A filter can feed a mapper, which feeds a reducer. The engine preserves the composition instead of flattening it into a label."
-  "Run the same analysis twice. The report is byte stable. Same input. Same evidence. Same conclusion."
-  "Under the surface: isolated adapters, a typed semantic graph, deterministic scheduling, verification fixtures, benchmarks, reproducible reports."
-  "Different syntax. Same meaning. Deterministic reasoning you can inspect."
+  "Take one function and write it four times: Python, Java, C, and Vinglish. The braces change. The types move. But the behavior is the same: keep the values that matter, transform them, combine the result."
+  "Vinglish is a language I built. Zero is deliberately separate from it: the compiler exports versioned J S O N, and Zero sees only the meaning on the other side."
+  "The project is built on a simple idea: programming languages express syntax differently; they express intent similarly. Each adapter lowers a language through its own frontend into a shared Semantic Graph. After that point, the engine does not know which language wrote it."
+  "And it is deliberately not an A I guess. It extracts facts: loops, branches, returns, calls, mutations. Independent providers turn those facts into evidence. Deterministic constraints activate compatible hypotheses and eliminate the rest. For this function, the report is a real, ordered pipeline: Filter, Mapper, Reducer."
+  "That structure also changes what an error can mean. Here, the compiler says only type mismatch. Zero sees an accumulator: a value updated through a loop and returned as a number. So it can identify an accumulator type conflict, and give fixes that are tied to that role."
+  "Run it twice and the report is byte stable. Same graph, same evidence, same answer. The verifier exercises 32 semantic patterns across Python, Java, C, and Vinglish transport. Vinglish itself remains decoupled: the compiler and Zero meet only at a versioned J S O N boundary."
+  "I used Codex with G P T 5.6 as an engineering partner to build the workspace around that idea: the Rust crates, adapters, corpus, verification, and launch tooling. But the key decision was mine: the final conclusion should be inspectable code, not a model response. You can trace every result back through rules and evidence."
+  "That makes a different kind of developer tool possible. Instead of searching for filenames or keywords, ask for a meaning: filter then reduce. The query matches functions through their stored semantic reports, without reparsing source code."
+  "Vinglish Zero. Different syntax. Same meaning. And every conclusion comes with its trail."
 )
 
 for index in "${!segments[@]}"; do

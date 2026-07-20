@@ -1,39 +1,78 @@
 1
-00:00:00,000 --> 00:00:08,000
-Vinglish Zero. Deterministic semantic reasoning for source code.
+00:00:00,000 --> 00:00:05,900
+Take one function and write it four times:
+Python, Java, C, and Vinglish.
 
 2
-00:00:08,000 --> 00:00:30,000
-Now look at the same behavior in four languages. Different syntax. Different frontends. The same underlying intent.
+00:00:05,900 --> 00:00:15,000
+The braces change. The types move. But the behavior is the same:
+keep, transform, combine.
 
 3
-00:00:30,000 --> 00:00:43,000
-Vinglish Zero lowers each one into a shared semantic representation. The code disappears. The meaning remains.
+00:00:15,000 --> 00:00:22,000
+Vinglish is a language I built.
+Zero is deliberately separate from it.
 
 4
-00:00:43,000 --> 00:00:55,000
-Filter. Map. Reduce. One ordered semantic pipeline, recovered without a model, embeddings, or a remote service.
+00:00:22,000 --> 00:00:29,000
+The compiler exports versioned JSON;
+Zero sees only the meaning on the other side.
 
 5
-00:00:55,000 --> 00:01:35,000
-Here is the reasoning path. Source becomes Semantic IR. IR becomes facts. Facts produce evidence. Evidence activates compatible hypotheses and eliminates the rest. The result is an inspectable conclusion.
+00:00:29,000 --> 00:00:40,200
+Programming languages express syntax differently;
+they express intent similarly.
 
 6
-00:01:35,000 --> 00:01:55,000
-The same evidence can interpret a failure. A type mismatch conflicts with the inferred accumulator contract, so the diagnostic explains the semantic role that broke.
+00:00:40,200 --> 00:00:52,000
+Each adapter lowers a language through its own frontend
+into a shared Semantic Graph.
 
 7
-00:01:55,000 --> 00:02:15,000
-On a larger function, multiple patterns remain separate and ordered. A filter can feed a mapper, which feeds a reducer.
+00:00:52,000 --> 00:01:02,600
+It is deliberately not an AI guess.
+Facts become evidence; deterministic constraints evaluate hypotheses.
 
 8
-00:02:15,000 --> 00:02:30,000
-Run the same analysis twice. The report is byte-stable. Same input. Same evidence. Same conclusion.
+00:01:02,600 --> 00:01:18,000
+This function becomes an ordered pipeline:
+Filter, Mapper, Reducer.
 
 9
-00:02:30,000 --> 00:02:45,000
-Under the surface: isolated adapters, a typed semantic graph, deterministic scheduling, verification fixtures, benchmarks, reproducible reports.
+00:01:18,000 --> 00:01:31,600
+The compiler says only “type mismatch.”
+Zero sees an accumulator and the semantic role that broke.
 
 10
-00:02:45,000 --> 00:03:00,000
-Different syntax. Same meaning. Deterministic reasoning you can inspect.
+00:01:31,600 --> 00:01:44,000
+Its fixes are tied to that role.
+
+11
+00:01:44,000 --> 00:01:55,600
+Same graph. Same evidence. Same answer.
+The report is byte-stable.
+
+12
+00:01:55,600 --> 00:02:06,000
+32 semantic patterns are verified across Python, Java, C,
+and Vinglish transport.
+
+13
+00:02:06,000 --> 00:02:19,400
+I used Codex with GPT-5.6 as an engineering partner:
+Rust crates, adapters, corpus, verification, and launch tooling.
+
+14
+00:02:19,400 --> 00:02:31,000
+The final conclusion stays inspectable code,
+not a model response.
+
+15
+00:02:31,000 --> 00:02:49,000
+Ask for a meaning: filter then reduce.
+The query matches stored semantic reports, not filenames.
+
+16
+00:02:49,000 --> 00:02:59,000
+Vinglish Zero. Different syntax. Same meaning.
+Every conclusion comes with its trail.

@@ -18,3 +18,14 @@ research/controlled-study/.bundles/
 research/controlled-study/.workspaces/
 *.prof
 *.out
+
+# Ignore parent/sibling repository
+/vinglish/
+
+# Media and Videos
+/launch-video/
+/generated-images/
+*.mp4
+*.mov
+*.mkv
+*.avi
