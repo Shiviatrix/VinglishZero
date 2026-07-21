@@ -1,26 +1,26 @@
 [00:00-00:15]
-Take one function and write it four times: Python, Java, C, and Vinglish. The braces change. The types move. But the behavior is the same: keep the values that matter, transform them, combine the result.
+What if you could query a 10-million-line codebase by meaning, not keywords? What if you could derive a function's intent across four languages, deterministically, without AI hallucination? That's the problem I set out to solve.
 
 [00:15-00:29]
-Vinglish is a language I built. Zero is deliberately separate from it: the compiler exports versioned JSON, and Zero sees only the meaning on the other side.
+Take one behavior and write it four ways. The human intent is the same: keep what matters, transform it, and combine the result. Syntax is noise. To find the signal, I built Zero.
 
 [00:29-00:52]
-The project is built on a simple idea: programming languages express syntax differently; they express intent similarly. Each adapter lowers a language through its own frontend into a shared Semantic Graph. After that point, the engine does not know which language wrote it.
+Zero is a language-agnostic semantic reasoning engine. Each adapter lowers source into a universal Semantic Graph. Once code enters Zero, the engine has no language-specific types or syntax. It only sees the intent.
 
 [00:52-01:18]
-And it is deliberately not an AI guess. It extracts facts: loops, branches, returns, calls, mutations. Independent providers turn those facts into evidence. Deterministic constraints activate compatible hypotheses and eliminate the rest. For this function, the report is a real, ordered pipeline: Filter, Mapper, Reducer.
+Zero does not use AI at runtime. It extracts hard facts: loops, branches, mutations. Fixed rule constraints eliminate incompatible hypotheses in microseconds. For this function, Zero creates an inspectable proof: Filter, Mapper, Reducer.
 
 [01:18-01:44]
-That structure also changes what an error can mean. Here, the compiler says only "type mismatch." Zero sees an accumulator: a value updated through a loop and returned as a number. So it can identify an accumulator type conflict, and give fixes that are tied to that role.
+When you understand intent, errors change completely. A compiler says "type mismatch." But Zero knows this variable is an accumulator inside a reduction loop. It pinpoints the broken role and provides a one-to-one fix tied to the developer's intent.
 
 [01:44-02:06]
-Run it twice and the report is byte-stable. Same graph, same evidence, same answer. The verifier exercises 32 semantic patterns across Python, Java, C, and Vinglish transport. Vinglish itself remains decoupled: the compiler and Zero meet only at a versioned JSON boundary.
+For identical input, the report is byte-stable: same graph, same evidence, same answer. Zero verifies 32 semantic patterns across four language transports. In the current corpus, the deterministic reasoning pass itself averages under one millisecond per sample.
 
 [02:06-02:31]
-I used Codex with GPT-5.6 as an engineering partner to build the workspace around that idea: the Rust crates, adapters, corpus, verification, and launch tooling. But the key decision was mine: the final conclusion should be inspectable code, not a model response. You can trace every result back through rules and evidence.
+I used Codex and GPT-5.6 as engineering partners: roughly 12,700 lines of Rust, four adapters, and an 80-test verification suite in seven days. AI accelerated construction, but every conclusion is inspectable, rules-based code.
 
 [02:31-02:49]
-That makes a different kind of developer tool possible. Instead of searching for filenames or keywords, ask for a meaning: filter then reduce. The query matches functions through their stored semantic reports, without reparsing source code.
+Because Zero caches intent, you can search repositories by meaning. Ask the CLI for "filter then reduce," and it returns semantic matches from cached reports without reparsing source.
 
 [02:49-02:59]
-Vinglish Zero. Different syntax. Same meaning. And every conclusion comes with its trail.
+Code should not be searched by what it looks like. It should be searched by what it does. This is Zero.

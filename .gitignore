@@ -23,7 +23,18 @@ research/controlled-study/.workspaces/
 /vinglish/
 
 # Media and Videos
-/launch-video/
+/launch-video/*
+# Keep authored launch-film sources versioned; generated media and local QA
+# artifacts remain excluded by this file and launch-video/.gitignore.
+!/launch-video/
+!/launch-video/scripts/
+!/launch-video/scripts/render-manim.sh
+!/launch-video/src/
+!/launch-video/src/components/
+!/launch-video/src/components/Presenter.tsx
+!/launch-video/manim/
+/launch-video/manim/*
+!/launch-video/manim/semantic_story.py
 /generated-images/
 /latex/
 

@@ -11,15 +11,15 @@ if ! command -v say >/dev/null 2>&1 || ! command -v afconvert >/dev/null 2>&1; t
 fi
 
 segments=(
-  "Take one function and write it four times: Python, Java, C, and Vinglish. The braces change. The types move. But the behavior is the same: keep the values that matter, transform them, combine the result."
-  "Vinglish is a language I built. Zero is deliberately separate from it: the compiler exports versioned J S O N, and Zero sees only the meaning on the other side."
-  "The project is built on a simple idea: programming languages express syntax differently; they express intent similarly. Each adapter lowers a language through its own frontend into a shared Semantic Graph. After that point, the engine does not know which language wrote it."
-  "And it is deliberately not an A I guess. It extracts facts: loops, branches, returns, calls, mutations. Independent providers turn those facts into evidence. Deterministic constraints activate compatible hypotheses and eliminate the rest. For this function, the report is a real, ordered pipeline: Filter, Mapper, Reducer."
-  "That structure also changes what an error can mean. Here, the compiler says only type mismatch. Zero sees an accumulator: a value updated through a loop and returned as a number. So it can identify an accumulator type conflict, and give fixes that are tied to that role."
-  "Run it twice and the report is byte stable. Same graph, same evidence, same answer. The verifier exercises 32 semantic patterns across Python, Java, C, and Vinglish transport. Vinglish itself remains decoupled: the compiler and Zero meet only at a versioned J S O N boundary."
-  "I used Codex with G P T 5.6 as an engineering partner to build the workspace around that idea: the Rust crates, adapters, corpus, verification, and launch tooling. But the key decision was mine: the final conclusion should be inspectable code, not a model response. You can trace every result back through rules and evidence."
-  "That makes a different kind of developer tool possible. Instead of searching for filenames or keywords, ask for a meaning: filter then reduce. The query matches functions through their stored semantic reports, without reparsing source code."
-  "Vinglish Zero. Different syntax. Same meaning. And every conclusion comes with its trail."
+  "What if you could query a ten-million-line codebase by meaning, not keywords? What if you could derive a function's intent across four languages, deterministically, without AI hallucination? That's the problem I set out to solve."
+  "Take one behavior and write it four ways. The human intent is the same: keep what matters, transform it, and combine the result. Syntax is noise. To find the signal, I built Zero."
+  "Zero is a language-agnostic semantic reasoning engine. Each adapter lowers source into a universal Semantic Graph. Once code enters Zero, the engine has no language-specific types or syntax. It only sees the intent."
+  "Zero does not use AI at runtime. It extracts hard facts: loops, branches, mutations. Fixed rule constraints eliminate incompatible hypotheses in microseconds. For this function, Zero creates an inspectable proof: Filter, Mapper, Reducer."
+  "When you understand intent, errors change completely. A compiler says type mismatch. But Zero knows this variable is an accumulator inside a reduction loop. It pinpoints the broken role and provides a one-to-one fix tied to the developer's intent."
+  "For identical input, the report is byte stable: same graph, same evidence, same answer. Zero verifies 32 semantic patterns across four language transports. In the current corpus, the deterministic reasoning pass itself averages under one millisecond per sample."
+  "I used Codex and G P T 5.6 as engineering partners: roughly twelve thousand seven hundred lines of Rust, four adapters, and an eighty-test verification suite in seven days. AI accelerated construction, but every conclusion is inspectable, rules-based code."
+  "Because Zero caches intent, you can search repositories by meaning. Ask the C L I for filter then reduce, and it returns semantic matches from cached reports without reparsing source."
+  "Code should not be searched by what it looks like. It should be searched by what it does. This is Zero."
 )
 
 for index in "${!segments[@]}"; do

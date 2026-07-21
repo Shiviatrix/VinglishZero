@@ -7,21 +7,44 @@ export const HEIGHT = DESIGN_HEIGHT * 2;
 // Keep the rendered film safely below the Build Week three-minute limit.
 export const DURATION = 179 * FPS;
 
+// A restrained matte palette keeps the semantic proofs legible at 4K.
 export const COLORS = {
-  background: '#0D0C0B',
-  surface: '#E7E1D8',
-  surfaceRaised: '#C8C0B6',
-  text: '#F5F0E8',
-  ink: '#191612',
-  muted: '#B4AEA4',
-  faint: '#7B756C',
-  blue: '#A6C7D7',
-  cyan: '#9BC6B8',
-  violet: '#D7A9B1',
-  green: '#B8C991',
-  amber: '#E38A36',
-  red: '#D17C62',
+  cream: '#F4F0E9',
+  paper: '#E8E2D9',
+  red: '#E97866',
+  blue: '#8AB6C9',
+  green: '#9BBF9A',
+  orange: '#E89143',
+  pink: '#D7A0A8',
+  ink: '#171513',
+  yellow: '#E4CC76',
+  border: '#B9B1A7',
+  teal: '#8AB6C9',
+  violet: '#C4A7D7',
+  amber: '#E89143',
+  background: '#0E0D0C',
+  surface: '#E8E2D9',
+  surfaceRaised: '#D6CEC3',
+  text: '#F4F0E9',
+  muted: '#B9B1A7',
+  faint: '#9BBF9A',
 } as const;
+
+const lightAccents: readonly string[] = [
+  COLORS.cream,
+  COLORS.paper,
+  COLORS.red,
+  COLORS.blue,
+  COLORS.green,
+  COLORS.orange,
+  COLORS.pink,
+  COLORS.yellow,
+  COLORS.teal,
+  COLORS.violet,
+  COLORS.amber,
+];
+
+export const accentTextColor = (accent: string) => (lightAccents.includes(accent) ? COLORS.ink : COLORS.paper);
 
 export type CodeLanguage = 'PYTHON' | 'JAVA' | 'C' | 'VINGLISH';
 
@@ -58,7 +81,7 @@ export const codeSamples: Record<CodeLanguage, string[]> = {
     '}',
   ],
   VINGLISH: [
-    'function sum_positive(number count)',
+    'function filter_map_reduce(number count)',
     'returns number',
     'begin',
     '    let mutable total be 0',
@@ -66,7 +89,7 @@ export const codeSamples: Record<CodeLanguage, string[]> = {
     '    repeat while index < count',
     '    begin',
     '        if index > 0',
-    '            total += index',
+    '            total += index * index',
     '        index += 1',
     '    end',
     '    return total',
@@ -75,10 +98,10 @@ export const codeSamples: Record<CodeLanguage, string[]> = {
 };
 
 export const codeColors: Record<CodeLanguage, string> = {
-  PYTHON: COLORS.blue,
+  PYTHON: COLORS.teal,
   JAVA: COLORS.amber,
   C: COLORS.violet,
-  VINGLISH: COLORS.cyan,
+  VINGLISH: COLORS.green,
 };
 
 export const cueFrames = {

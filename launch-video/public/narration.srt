@@ -1,51 +1,50 @@
 1
-00:00:00,000 --> 00:00:05,900
-Take one function and write it four times:
-Python, Java, C, and Vinglish.
+00:00:00,000 --> 00:00:07,300
+What if you could query a ten-million-line codebase by meaning,
+not keywords?
 
 2
-00:00:05,900 --> 00:00:15,000
-The braces change. The types move. But the behavior is the same:
-keep, transform, combine.
+00:00:07,300 --> 00:00:15,000
+Derive intent across four languages, deterministically,
+without AI hallucination.
 
 3
 00:00:15,000 --> 00:00:22,000
-Vinglish is a language I built.
-Zero is deliberately separate from it.
+One behavior. Four surface syntaxes.
+The human intent stays the same.
 
 4
 00:00:22,000 --> 00:00:29,000
-The compiler exports versioned JSON;
-Zero sees only the meaning on the other side.
+Keep what matters. Transform it. Combine the result.
+Syntax is noise. Zero finds the signal.
 
 5
 00:00:29,000 --> 00:00:40,200
-Programming languages express syntax differently;
-they express intent similarly.
+Each adapter lowers source into a universal Semantic Graph.
 
 6
 00:00:40,200 --> 00:00:52,000
-Each adapter lowers a language through its own frontend
-into a shared Semantic Graph.
+After that point, Zero sees no language-specific types or syntax.
+It only sees intent.
 
 7
-00:00:52,000 --> 00:01:02,600
-It is deliberately not an AI guess.
-Facts become evidence; deterministic constraints evaluate hypotheses.
+00:00:52,000 --> 00:01:03,400
+Zero does not use AI at runtime.
+Facts and fixed rules evaluate hypotheses.
 
 8
-00:01:02,600 --> 00:01:18,000
-This function becomes an ordered pipeline:
+00:01:03,400 --> 00:01:18,000
+This function has an inspectable proof:
 Filter, Mapper, Reducer.
 
 9
 00:01:18,000 --> 00:01:31,600
-The compiler says only “type mismatch.”
-Zero sees an accumulator and the semantic role that broke.
+A compiler says only “type mismatch.”
+Zero sees an accumulator inside a reduction loop.
 
 10
 00:01:31,600 --> 00:01:44,000
-Its fixes are tied to that role.
+The suggested fix is tied to the broken semantic role.
 
 11
 00:01:44,000 --> 00:01:55,600
@@ -54,25 +53,24 @@ The report is byte-stable.
 
 12
 00:01:55,600 --> 00:02:06,000
-32 semantic patterns are verified across Python, Java, C,
-and Vinglish transport.
+32 patterns are verified across four language transports.
+Reasoning averages under one millisecond on the current corpus.
 
 13
 00:02:06,000 --> 00:02:19,400
-I used Codex with GPT-5.6 as an engineering partner:
-Rust crates, adapters, corpus, verification, and launch tooling.
+Codex and GPT-5.6 accelerated the Rust engine,
+four adapters, and the verification suite.
 
 14
 00:02:19,400 --> 00:02:31,000
-The final conclusion stays inspectable code,
-not a model response.
+Every conclusion remains inspectable, rules-based code.
 
 15
 00:02:31,000 --> 00:02:49,000
-Ask for a meaning: filter then reduce.
-The query matches stored semantic reports, not filenames.
+Ask for “filter then reduce.”
+Zero matches cached semantic reports without reparsing source.
 
 16
 00:02:49,000 --> 00:02:59,000
-Vinglish Zero. Different syntax. Same meaning.
-Every conclusion comes with its trail.
+Code should be searched by what it does.
+This is Zero.

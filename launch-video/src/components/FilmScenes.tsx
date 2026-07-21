@@ -1,14 +1,14 @@
-import {CSSProperties} from 'react';
+import {CSSProperties, ReactNode} from 'react';
 import {AbsoluteFill, Img, OffthreadVideo, interpolate, staticFile, useCurrentFrame} from 'remotion';
 
 import {COLORS, CodeLanguage, codeColors, codeSamples} from '../data';
 import {mono} from '../styles';
-import {Atmosphere, CodeWindow, DesignCanvas, EditorialPanel, Fade, TinyLabel, enter} from './Primitives';
+import {AccentChip, Atmosphere, CodeWindow, DesignCanvas, EditorialPanel, Fade, TinyLabel, enter} from './Primitives';
 import {Presenter} from './Presenter';
 
 const canvas: CSSProperties = {position: 'absolute', inset: 0, overflow: 'hidden'};
 
-const SceneFrame = ({children}: {children: React.ReactNode}) => (
+const SceneFrame = ({children}: {children: ReactNode}) => (
   <AbsoluteFill style={canvas}>
     <DesignCanvas>
       <Atmosphere />
@@ -24,9 +24,9 @@ const ManimClip = ({file}: {file: string}) => (
   />
 );
 
-const Title = ({children, from = 0, accent = COLORS.text}: {children: React.ReactNode; from?: number; accent?: string}) => (
+const Title = ({children, from = 0}: {children: ReactNode; from?: number}) => (
   <Fade from={from} duration={20} style={{position: 'absolute', left: 118, top: 114, maxWidth: 1040}}>
-    <div style={{fontSize: 74, lineHeight: 1.04, letterSpacing: '-0.065em', fontWeight: 760, color: accent}}>{children}</div>
+    <div style={{fontSize: 74, lineHeight: 1.04, letterSpacing: '-0.055em', fontWeight: 800, color: COLORS.text}}>{children}</div>
   </Fade>
 );
 
@@ -35,19 +35,23 @@ export const HookScene = ({presenterSrc}: {presenterSrc?: string}) => {
   const wordIn = enter(frame, 22, 18);
   return (
     <SceneFrame>
-      <div style={{position: 'absolute', left: 118, top: 164, width: 980}}>
-        <Fade from={0} duration={18}><TinyLabel color={COLORS.amber}>OpenAI Build Week</TinyLabel></Fade>
-        <div style={{marginTop: 34, fontSize: 84, lineHeight: 0.97, letterSpacing: '-0.075em', fontWeight: 780, color: COLORS.text}}>
-          What if code<br />could explain what<br /><span style={{color: COLORS.amber}}>it is trying to do?</span>
+      <div style={{position: 'absolute', left: 118, top: 150, width: 910}}>
+        <Fade from={0} duration={18}><AccentChip color={COLORS.amber}>OpenAI Build Week</AccentChip></Fade>
+        <div style={{marginTop: 34, fontSize: 84, lineHeight: 0.97, letterSpacing: '-0.07em', fontWeight: 800, color: COLORS.text}}>
+          Query code by<br />
+          <span style={{color: COLORS.amber}}>fundamental meaning.</span>
         </div>
-        <div style={{marginTop: 42, opacity: wordIn, fontSize: 24, lineHeight: 1.45, maxWidth: 760, color: COLORS.muted}}>
-          Vinglish Zero reads structure, not surface syntax.
+        <div style={{marginTop: 42, opacity: wordIn, fontSize: 25, lineHeight: 1.45, maxWidth: 720, color: COLORS.muted, fontWeight: 600}}>
+          Deterministic intent inference across four language transports.
         </div>
       </div>
-      <div style={{position: 'absolute', left: 118, bottom: 106, display: 'flex', alignItems: 'center', gap: 18, opacity: enter(frame, 92, 16)}}>
-        <Img src={staticFile('vinglish-zero.svg')} style={{width: 68, height: 68}} />
-        <div style={{fontSize: 25, fontWeight: 720, letterSpacing: '-0.02em', color: COLORS.text}}>Vinglish Zero</div>
-      </div>
+      <EditorialPanel style={{position: 'absolute', left: 118, bottom: 100, display: 'flex', alignItems: 'center', gap: 18, padding: '14px 20px', opacity: enter(frame, 92, 16)}}>
+        <Img src={staticFile('vinglish-zero.svg')} style={{width: 58, height: 58}} />
+        <div style={{display: 'flex', flexDirection: 'column'}}>
+          <TinyLabel color={COLORS.blue}>Deterministic Code Reasoning</TinyLabel>
+          <div style={{marginTop: 8, fontSize: 27, fontWeight: 800, letterSpacing: '-0.02em', color: COLORS.ink}}>Zero</div>
+        </div>
+      </EditorialPanel>
       {presenterSrc ? <Presenter src={presenterSrc} startFrom={0} /> : null}
     </SceneFrame>
   );
@@ -64,7 +68,7 @@ export const SyntaxScene = ({presenterSrc}: {presenterSrc?: string}) => {
   ];
   return (
     <SceneFrame>
-      <Title>Four languages.<br />One behavior.</Title>
+      <Title>One behavior.<br /><span style={{color: COLORS.amber}}>Written four ways.</span></Title>
       {languages.map((language, index) => {
         const progress = enter(frame, 26 + index * 18, 18);
         return (
@@ -103,25 +107,25 @@ export const DeterminismScene = ({presenterSrc}: {presenterSrc?: string}) => (
 export const CodexScene = ({presenterSrc}: {presenterSrc?: string}) => {
   const frame = useCurrentFrame();
   const cards = [
-    ['Rust workspace', 'IR, reasoning, diagnostics'],
-    ['Adapter corpus', 'Python, Java, C, Vinglish transport'],
-    ['Verification', '32 deterministic semantic patterns'],
+    {label: 'Rust Engine', detail: '~12.7K lines of deterministic Rust', color: COLORS.teal},
+    {label: 'Language Transports', detail: 'Python · Java · C · Vinglish', color: COLORS.violet},
+    {label: 'Verification', detail: '32 patterns · 80 registered tests', color: COLORS.green},
   ];
   return (
     <SceneFrame>
       <div style={{position: 'absolute', left: 118, top: 126, width: 920}}>
-        <Fade from={0}><TinyLabel color={COLORS.green}>Built with Codex + GPT-5.6</TinyLabel></Fade>
-        <div style={{marginTop: 30, fontSize: 66, lineHeight: 1.03, letterSpacing: '-0.064em', fontWeight: 760, color: COLORS.text}}>
-          AI accelerated the build.<br />The conclusions stay inspectable.
+        <Fade from={0}><AccentChip color={COLORS.amber}>Built with Codex + GPT-5.6</AccentChip></Fade>
+        <div style={{marginTop: 30, fontSize: 66, lineHeight: 1.03, letterSpacing: '-0.055em', fontWeight: 800, color: COLORS.text}}>
+          AI accelerated the build.<br /><span style={{color: COLORS.red}}>Every conclusion is inspectable.</span>
         </div>
       </div>
-      <div style={{position: 'absolute', left: 118, bottom: 128, width: 880, display: 'grid', gap: 14}}>
-        {cards.map(([label, detail], index) => {
+      <div style={{position: 'absolute', left: 118, bottom: 128, width: 880, display: 'grid', gap: 16}}>
+        {cards.map(({label, detail, color}, index) => {
           const progress = enter(frame, 70 + index * 28, 18);
           return (
-            <EditorialPanel key={label} style={{padding: '20px 26px', opacity: progress, transform: `translateY(${(1 - progress) * 14}px)`}}>
-              <div style={{fontSize: 22, fontWeight: 720, letterSpacing: '-0.025em'}}>{label}</div>
-              <div style={{marginTop: 5, color: '#776c5d', fontSize: 16}}>{detail}</div>
+            <EditorialPanel key={label} style={{padding: '16px 22px', opacity: progress, transform: `translateY(${(1 - progress) * 14}px)`}}>
+              <AccentChip color={color} style={{fontSize: 12, padding: '7px 10px', boxShadow: 'none'}}>{label}</AccentChip>
+              <div style={{marginTop: 11, color: COLORS.ink, fontSize: 19, fontWeight: 700}}>{detail}</div>
             </EditorialPanel>
           );
         })}
@@ -138,14 +142,15 @@ export const QueryScene = ({presenterSrc: _presenterSrc}: {presenterSrc?: string
   return (
     <SceneFrame>
       <Title>Search by meaning,<br />not filenames.</Title>
-      <EditorialPanel style={{position: 'absolute', left: 118, top: 484, width: 1120, padding: '28px 34px', background: '#151C23', color: COLORS.text, opacity: command, transform: `translateY(${(1 - command) * 20}px)`}}>
-        <div style={{...mono, fontSize: 35, letterSpacing: '-0.04em'}}><span style={{color: COLORS.cyan}}>$</span> vz query "filter THEN reduce"</div>
+      <EditorialPanel style={{position: 'absolute', left: 118, top: 484, width: 1120, padding: '28px 34px', opacity: command, transform: `translateY(${(1 - command) * 20}px)`}}>
+        <div style={{...mono, fontSize: 35, letterSpacing: '-0.04em', color: COLORS.ink}}><span style={{color: COLORS.red, fontWeight: 700}}>$</span> vz query "filter THEN reduce"</div>
       </EditorialPanel>
-      <div style={{position: 'absolute', left: 154, top: 635, opacity: results}}>
-        <TinyLabel color={COLORS.green}>match</TinyLabel>
-        <div style={{marginTop: 16, fontSize: 36, fontWeight: 720, letterSpacing: '-0.045em', color: COLORS.text}}>filter_map_reduce</div>
-        <div style={{marginTop: 11, fontSize: 22, color: COLORS.muted}}>Filter → Mapper → Reducer</div>
-      </div>
+      <EditorialPanel style={{position: 'absolute', left: 118, top: 635, width: 780, padding: '22px 28px', opacity: results}}>
+        <AccentChip color={COLORS.green} style={{fontSize: 12, padding: '7px 10px', boxShadow: 'none'}}>Match</AccentChip>
+        <div style={{...mono, marginTop: 16, fontSize: 34, fontWeight: 700, letterSpacing: '-0.045em', color: COLORS.ink}}>filter_map_reduce</div>
+        <div style={{marginTop: 11, fontSize: 22, color: COLORS.ink, fontWeight: 700}}>Filter → Mapper → Reducer</div>
+        <TinyLabel color={COLORS.blue} style={{marginTop: 16}}>Cached Semantic Report · No Source Reparse</TinyLabel>
+      </EditorialPanel>
     </SceneFrame>
   );
 };
@@ -156,14 +161,15 @@ export const EndingScene = ({presenterSrc}: {presenterSrc?: string}) => {
   return (
     <SceneFrame>
       <div style={{position: 'absolute', left: 118, top: 176, width: 1080, opacity: reveal}}>
-        <div style={{fontSize: 72, lineHeight: 1.03, letterSpacing: '-0.066em', fontWeight: 770, color: COLORS.text}}>
-          Different syntax.<br /><span style={{color: COLORS.amber}}>Same meaning.</span>
+        <div style={{fontSize: 64, lineHeight: 1.03, letterSpacing: '-0.066em', fontWeight: 770, color: COLORS.text}}>
+          Code shouldn't be searched by what it looks like.<br /><span style={{color: COLORS.amber}}>It should be searched by what it does.</span>
         </div>
-        <div style={{marginTop: 34, fontSize: 23, color: COLORS.muted}}>github.com/Shiviatrix/VinglishZero</div>
+        <div style={{marginTop: 34, fontSize: 26, color: COLORS.muted}}>Every conclusion backed by deterministic proof.</div>
+        <div style={{marginTop: 18, fontSize: 20, color: COLORS.muted}}>github.com/Shiviatrix/VinglishZero</div>
       </div>
-      <div style={{position: 'absolute', left: 118, bottom: 132, width: 158, height: 158, opacity: reveal, borderRadius: 28, background: '#17130F', border: `2px solid ${COLORS.amber}`, display: 'grid', placeItems: 'center'}}>
-        <Img src={staticFile('vinglish-zero.svg')} style={{width: 126, height: 126}} />
-      </div>
+      <EditorialPanel style={{position: 'absolute', left: 118, bottom: 132, width: 172, height: 172, opacity: reveal, display: 'grid', placeItems: 'center', background: COLORS.paper}}>
+        <Img src={staticFile('vinglish-zero.svg')} style={{width: 132, height: 132}} />
+      </EditorialPanel>
       {presenterSrc ? <Presenter src={presenterSrc} startFrom={169 * 30} compact /> : null}
     </SceneFrame>
   );

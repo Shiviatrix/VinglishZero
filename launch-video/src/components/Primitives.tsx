@@ -1,8 +1,10 @@
 import {CSSProperties, ReactNode} from 'react';
 import {interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
 
-import {COLORS, DESIGN_HEIGHT, DESIGN_WIDTH} from '../data';
+import {accentTextColor, COLORS, DESIGN_HEIGHT, DESIGN_WIDTH} from '../data';
 import {mono} from '../styles';
+
+const inkBorder = `2px solid ${COLORS.border}`;
 
 export const enter = (frame: number, at: number, duration = 18) =>
   interpolate(frame, [at, at + duration], [0, 1], {
@@ -39,7 +41,15 @@ export const DesignCanvas = ({children}: {children: ReactNode}) => {
   );
 };
 
-export const Atmosphere = () => <div style={{position: 'absolute', inset: 0, background: COLORS.background}} />;
+export const Atmosphere = () => (
+  <div
+    style={{
+      position: 'absolute',
+      inset: 0,
+      backgroundColor: COLORS.background,
+    }}
+  />
+);
 
 export const EditorialPanel = ({
   children,
@@ -50,10 +60,40 @@ export const EditorialPanel = ({
 }) => (
   <div
     style={{
-      background: COLORS.surface,
+      background: COLORS.paper,
       color: COLORS.ink,
-      borderRadius: 18,
-      border: `1px solid ${COLORS.surfaceRaised}`,
+      border: inkBorder,
+      ...style,
+    }}
+  >
+    {children}
+  </div>
+);
+
+export const AccentChip = ({
+  children,
+  color = COLORS.green,
+  style,
+}: {
+  children: ReactNode;
+  color?: string;
+  style?: CSSProperties;
+}) => (
+  <div
+    style={{
+      ...mono,
+      display: 'inline-flex',
+      alignItems: 'center',
+      width: 'fit-content',
+      padding: '9px 14px',
+      border: `3px solid ${COLORS.border}`,
+      color: accentTextColor(color),
+      background: color,
+      fontSize: 14,
+      fontWeight: 700,
+      letterSpacing: '0.08em',
+      lineHeight: 1,
+      textTransform: 'uppercase',
       ...style,
     }}
   >
@@ -74,23 +114,25 @@ export const CodeWindow = ({
   highlight?: number[];
   scale?: number;
 }) => (
-  <EditorialPanel style={{padding: 0, overflow: 'hidden', border: `1px solid ${accent}66`}}>
+  <EditorialPanel style={{padding: 0, overflow: 'hidden'}}>
     <div
       style={{
+        ...mono,
         height: 42 * scale,
         display: 'flex',
         alignItems: 'center',
         padding: `0 ${22 * scale}px`,
         background: accent,
-        color: COLORS.ink,
+        color: accentTextColor(accent),
         fontSize: 13 * scale,
-        fontWeight: 760,
-        letterSpacing: '0.16em',
+        fontWeight: 700,
+        letterSpacing: '0.12em',
+        borderBottom: inkBorder,
       }}
     >
       {language}
     </div>
-    <div style={{padding: `${17 * scale}px ${22 * scale}px ${19 * scale}px`}}>
+    <div style={{padding: `${17 * scale}px ${22 * scale}px ${19 * scale}px`, background: COLORS.paper}}>
       {lines.map((line, index) => {
         const active = highlight.includes(index);
         return (
@@ -102,11 +144,12 @@ export const CodeWindow = ({
               display: 'flex',
               alignItems: 'center',
               padding: `0 ${9 * scale}px`,
-              borderRadius: 5 * scale,
-              color: active ? COLORS.ink : '#6F6457',
-              background: active ? COLORS.surfaceRaised : 'transparent',
+              color: COLORS.ink,
+              background: active ? COLORS.yellow : 'transparent',
+              borderLeft: active ? `4px solid ${COLORS.red}` : '4px solid transparent',
               whiteSpace: 'pre',
               fontSize: 16 * scale,
+              fontWeight: active ? 700 : 400,
               lineHeight: 1.35,
             }}
           >
@@ -118,8 +161,29 @@ export const CodeWindow = ({
   </EditorialPanel>
 );
 
-export const TinyLabel = ({children, color = COLORS.muted}: {children: ReactNode; color?: string}) => (
-  <div style={{fontSize: 14, lineHeight: 1, letterSpacing: '0.16em', fontWeight: 720, color, textTransform: 'uppercase'}}>{children}</div>
+export const TinyLabel = ({
+  children,
+  color = COLORS.blue,
+  style,
+}: {
+  children: ReactNode;
+  color?: string;
+  style?: CSSProperties;
+}) => (
+  <div
+    style={{
+      ...mono,
+      fontSize: 14,
+      lineHeight: 1,
+      letterSpacing: '0.12em',
+      fontWeight: 700,
+      color,
+      textTransform: 'uppercase',
+      ...style,
+    }}
+  >
+    {children}
+  </div>
 );
 
 export const Fade = ({

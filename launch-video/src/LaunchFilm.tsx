@@ -25,6 +25,9 @@ export const LaunchFilm = ({
   void showCaptions;
   return (
     <AbsoluteFill style={stage}>
+      <style>
+        {`@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Shrikhand&family=Space+Mono:wght@400;700&display=swap');`}
+      </style>
       <AudioBed />
       <Sequence from={cueFrames.hook} durationInFrames={cueFrames.syntax - cueFrames.hook}><HookScene presenterSrc={presenterSrc} /></Sequence>
       <Sequence from={cueFrames.syntax} durationInFrames={cueFrames.semanticLift - cueFrames.syntax}><SyntaxScene presenterSrc={presenterSrc} /></Sequence>

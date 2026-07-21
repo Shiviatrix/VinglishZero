@@ -14,9 +14,9 @@ export const stage: CSSProperties = {
   overflow: 'hidden',
   background: COLORS.background,
   color: COLORS.text,
-  fontFamily: '"Avenir Next", "Gill Sans", "Trebuchet MS", sans-serif',
+  fontFamily: '"Baloo 2", system-ui, sans-serif',
 };
 
 export const mono: CSSProperties = {
-  fontFamily: '"SFMono-Regular", "Cascadia Code", "Roboto Mono", Menlo, monospace',
+  fontFamily: '"Space Mono", monospace',
 };
