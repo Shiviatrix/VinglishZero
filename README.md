@@ -1,7 +1,7 @@
 <p align="center">
   <img src="vinglish-zero.svg" alt="Vinglish Zero" width="240">
 </p>
-
+(Submitted to openAI build week)
 # Vinglish Zero
 
 **A deterministic, language-independent semantic operating system for code.**
